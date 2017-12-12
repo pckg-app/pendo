@@ -2,5 +2,11 @@
 
 return [
     'resources' => [],
-    'apps'      => [],
+    'apps'      => [
+        'pendo' => [
+            'host' => [
+                '(.*)',
+            ],
+        ],
+    ],
 ];
