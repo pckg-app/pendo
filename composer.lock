@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8709e3dc0af9a90708134a6e345d38a2",
+    "content-hash": "dca4efbdaff8bbc45f0a02d936879c94",
     "packages": [
         {
             "name": "aferrandini/phpqrcode",
@@ -2787,24 +2787,21 @@
         },
         {
             "name": "robrichards/xmlseclibs",
-            "version": "2.0.x-dev",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/robrichards/xmlseclibs.git",
-                "reference": "1369dd1cbf54d29f07cc6eec50839c9d4efc3920"
+                "reference": "222303db07bef97b948f4882d98294d9facaddb4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/robrichards/xmlseclibs/zipball/1369dd1cbf54d29f07cc6eec50839c9d4efc3920",
-                "reference": "1369dd1cbf54d29f07cc6eec50839c9d4efc3920",
+                "url": "https://api.github.com/repos/robrichards/xmlseclibs/zipball/222303db07bef97b948f4882d98294d9facaddb4",
+                "reference": "222303db07bef97b948f4882d98294d9facaddb4",
                 "shasum": ""
             },
             "require": {
-                "php": ">= 5.3"
-            },
-            "suggest": {
-                "ext-mcrypt": "MCrypt extension",
-                "ext-openssl": "OpenSSL extension"
+                "ext-openssl": "*",
+                "php": ">= 5.4"
             },
             "type": "library",
             "autoload": {
@@ -2824,7 +2821,7 @@
                 "xml",
                 "xmldsig"
             ],
-            "time": "2016-09-23T14:14:15+00:00"
+            "time": "2017-11-22T13:10:09+00:00"
         },
         {
             "name": "rollbar/rollbar",
@@ -5823,6 +5820,7 @@
         "pckg/payment": 20,
         "pckg/tempus": 20,
         "dimsemenov/magnific-popup": 20,
+        "robrichards/xmlseclibs": 20,
         "facebook/facebook-instant-articles-sdk-php": 20,
         "codeception/codeception": 20
     },

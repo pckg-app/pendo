@@ -1,7 +1,7 @@
 {
-  "name": "pckg/skeleton",
-  "description": "Directory structure, required files and suggestions for /pckg",
-  "homepage": "https://github.com/pckg/skeleton",
+  "name": "pckg-app/pendo",
+  "description": "Fiscalization app for HR & SI",
+  "homepage": "https://github.com/pckg-app/pendo",
   "license": "MIT",
   "authors": [
     {
@@ -31,7 +31,7 @@
     "bootstrap-select/bootstrap-select": "1.*",
     "kraksoft/colorbox": "1.*",
     "dimsemenov/magnific-popup": "dev-master",
-    "robrichards/xmlseclibs": "^2.0",
+    "robrichards/xmlseclibs": "dev-master",
     "aferrandini/phpqrcode": "^1.0",
     "intervention/image": "^2.3",
     "league/csv": "^8.1",
