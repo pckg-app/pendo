@@ -1,12 +1,12 @@
-<?php namespace Pckg\Fiscalization\Service;
+<?php namespace Pckg\Pendo\Service\Fiscalization\Service;
 
 use DateTime;
 use DOMDocument;
 use DOMElement;
 use Exception;
-use Pckg\Fiscalization\Service\Fiscalization\AbstractService;
-use Pckg\Fiscalization\Service\Fiscalization\Business;
-use Pckg\Fiscalization\Service\Fiscalization\Invoice;
+use Pckg\Pendo\Service\Fiscalization\AbstractService;
+use Pckg\Pendo\Service\Fiscalization\Business;
+use Pckg\Pendo\Service\Fiscalization\Invoice;
 use XMLWriter;
 
 class Purh extends AbstractService

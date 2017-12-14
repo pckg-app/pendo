@@ -1,18 +1,15 @@
 <?php
 
 use Pckg\Framework\Provider;
+use Pckg\Pendo\Provider\Pendo as PendoProvider;
 
 class Pendo extends Provider
 {
 
-    public function routes()
+    public function providers()
     {
         return [
-            routeGroup([
-                           'controller' => \Pckg\Pendo\Controller\Pendo::class,
-                       ], [
-                           'homepage' => route('/', 'index'),
-                       ]),
+            PendoProvider::class,
         ];
     }
 

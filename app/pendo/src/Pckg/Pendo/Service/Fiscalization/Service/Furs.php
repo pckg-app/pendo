@@ -1,4 +1,4 @@
-<?php namespace Pckg\Fiscalization\Service;
+<?php namespace Pckg\Pendo\Service\Fiscalization\Service;
 
 require_once path('root') . 'vendor/robrichards/xmlseclibs/xmlseclibs.php';
 // require_once __CORE_OPENPROF_ROOT__ . 'include/library/phpqrcode/phpqrcode.php';

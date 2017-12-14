@@ -1,5 +1,8 @@
 <?php namespace Pckg\Pendo\Service\Fiscalization;
 
+use Pckg\Pendo\Service\Fiscalization\Service\Furs;
+use Pckg\Pendo\Service\Fiscalization\Service\Purh;
+
 class Business
 {
 
@@ -39,6 +42,13 @@ class Business
     public function getElectronicDeviceId()
     {
         return $this->electronicDeviceId;
+    }
+
+    public function setElectronicDeviceId($electronicDeviceId)
+    {
+        $this->electronicDeviceId = $electronicDeviceId;
+
+        return $this;
     }
 
 }

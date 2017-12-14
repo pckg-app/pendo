@@ -13,8 +13,6 @@ class Config
 
     protected $serverCert;
 
-    protected $url;
-
     protected $softwareSupplierTaxNumber;
 
     public function __construct(
@@ -23,7 +21,6 @@ class Config
         $p12Cert,
         $password,
         $serverCert,
-        $url,
         $softwareSupplierTaxNumber
     ) {
         $this->taxNumber = substr($taxNumber, 2);
@@ -31,7 +28,6 @@ class Config
         $this->p12Cert = $p12Cert;
         $this->password = $password;
         $this->serverCert = $serverCert;
-        $this->url = $url;
         $this->softwareSupplierTaxNumber = $softwareSupplierTaxNumber;
     }
 
@@ -58,11 +54,6 @@ class Config
     public function getServerCert()
     {
         return $this->serverCert;
-    }
-
-    public function getUrl()
-    {
-        return $this->url;
     }
 
     public function getSoftwareSupplierTaxNumber()

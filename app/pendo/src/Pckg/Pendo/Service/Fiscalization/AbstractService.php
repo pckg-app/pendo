@@ -38,13 +38,19 @@ abstract class AbstractService
      */
     protected $invoice;
 
-    public function __construct(Config $config, Business $business, Invoice $invoice = null)
+    public function __construct(Config $config, Business $business)
     {
         $this->config = $config;
         $this->business = $business;
-        $this->invoice = $invoice;
         $this->xmlsPath = path('app_private') . 'furs' . path('ds') . 'xml' . path('ds');
         $this->qrDirPath = path('app_private') . 'furs' . path('ds') . 'qr' . path('ds');
+    }
+
+    public function setInvoice(Invoice $invoice)
+    {
+        $this->invoice = $invoice;
+
+        return $this;
     }
 
     public function getZOI()
