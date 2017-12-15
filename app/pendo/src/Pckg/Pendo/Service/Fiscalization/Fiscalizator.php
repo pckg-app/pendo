@@ -35,8 +35,8 @@ class Fiscalizator
     {
         return new Invoice(
             $this->fiscalizationRecord->furs_id,
-            number_format($this->price, 2),
-            number_format($this->price, 2),
+            number_format($this->order['total'], 2),
+            number_format($this->order['payment'], 2),
             date('Y-m-d') . 'T' . date('H:i:s')
         );
     }
@@ -46,7 +46,6 @@ class Fiscalizator
      */
     public function createServiceFromBusiness()
     {
-
         $taxNumber = $this->fiscalizationBusiness->getTaxNumber();
 
         $code = strtolower(substr($taxNumber, 2));
@@ -68,12 +67,17 @@ class Fiscalizator
         /**
          * We're fiscalizing some bill, so we need to set some data.
          */
-        $fiscalizationService->setOrder(only($this->invoiceData, ['payment', 'datetime', 'identifier', 'platform']));
+        $this->setOrder(only($this->invoiceData, ['payment', 'total', 'datetime', 'identifier', 'platform']));
 
         /**
          * Create new fiscalization record for fiscalization business.
          */
         $this->createFiscalizationRecord();
+
+        /**
+         * Create fiscalization invoice.
+         */
+        $fiscalizationService->setInvoice($this->createInvoice());
 
         /**
          * Create invoice request.
@@ -82,24 +86,17 @@ class Fiscalizator
         $fiscalizationService->postXml();
 
         /**
-         * Generate QR code.
+         * Store some data.
          */
-        if ($qrFile = $fiscalizationService->generateQR()) {
-            $this->fiscalizationRecord->qr = $qrFile;
-        }
-
-        /**
-         * Set EOR code, which is always the same for same bill.
-         */
-        if ($eor = $fiscalizationService->getEOR()) {
-            $this->fiscalizationRecord->eor = $eor;
-        }
-
-        /**
-         * ZOU changes based on date of confirmation and other properties.
-         */
-        if ($zoi = $fiscalizationService->getZOI()) {
-            $this->fiscalizationRecord->zoi = $zoi;
+        $data = [
+            'qr' => 'generateQR', // Generate QR code.
+            'eor' => 'getEOR', // Set EOR code, which is always the same for same bill.
+            'zoi' => 'getZOI', // ZOU changes based on date of confirmation and other properties.
+        ];
+        foreach ($data as $key => $method) {
+            if ($value = $fiscalizationService->{$method}()) {
+                $this->fiscalizationRecord->{$key} = $value;
+            }
         }
 
         $this->fiscalizationRecord->save();

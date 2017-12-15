@@ -28,7 +28,7 @@ class Invoice
             'datetime',
             'platform',
             'identifier',
-            'invoice',
+            'total',
             'payment',
             'taxes',
         ];
