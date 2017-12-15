@@ -1,6 +1,8 @@
 <?php namespace Pckg\Pendo\Provider;
 
 use Pckg\Framework\Provider;
+use Pckg\Pendo\Console\EchoFurs;
+use Pckg\Pendo\Console\EchoPurh;
 use Pckg\Pendo\Controller\Business;
 use Pckg\Pendo\Controller\Company;
 use Pckg\Pendo\Controller\Invoice;
@@ -44,6 +46,14 @@ class Pendo extends Provider
                        ], [
                            '.confirm' => route('/confirm', 'confirm'),
                        ]),
+        ];
+    }
+
+    public function consoles()
+    {
+        return [
+            EchoPurh::class,
+            EchoFurs::class,
         ];
     }
 
