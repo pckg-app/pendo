@@ -1,6 +1,9 @@
-<?php namespace Pckg\Pendo\Service\Fiscalization;
+<?php namespace Pckg\Pendo\Service;
 
 use Pckg\Pendo\Entity\Fiscalizations;
+use Pckg\Pendo\Service\Fiscalization\Business;
+use Pckg\Pendo\Service\Fiscalization\Config;
+use Pckg\Pendo\Service\Fiscalization\Invoice;
 use Pckg\Pendo\Service\Fiscalization\Service\Furs;
 use Pckg\Pendo\Service\Fiscalization\Service\Purh;
 
@@ -20,6 +23,9 @@ class Fiscalizator
      */
     protected $fiscalizationRecord;
 
+    /**
+     * @var Business
+     */
     protected $fiscalizationBusiness;
 
     protected $invoiceData;
@@ -89,7 +95,7 @@ class Fiscalizator
          * Store some data.
          */
         $data = [
-            'qr' => 'generateQR', // Generate QR code.
+            'qr'  => 'generateQR', // Generate QR code.
             'eor' => 'getEOR', // Set EOR code, which is always the same for same bill.
             'zoi' => 'getZOI', // ZOU changes based on date of confirmation and other properties.
         ];

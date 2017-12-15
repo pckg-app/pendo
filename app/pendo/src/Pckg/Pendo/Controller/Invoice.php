@@ -3,7 +3,7 @@
 use Exception;
 use Pckg\Pendo\Record\Business;
 use Pckg\Pendo\Record\Company;
-use Pckg\Pendo\Service\Fiscalization\Fiscalizator;
+use Pckg\Pendo\Service\Fiscalizator;
 
 /**
  * Class Invoice
