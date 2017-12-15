@@ -1,8 +1,5 @@
 <?php namespace Pckg\Pendo\Service\Fiscalization;
 
-use Pckg\Pendo\Service\Fiscalization\Service\Furs;
-use Pckg\Pendo\Service\Fiscalization\Service\Purh;
-
 class Business
 {
 
