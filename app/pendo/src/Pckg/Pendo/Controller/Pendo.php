@@ -13,7 +13,7 @@ class Pendo
      */
     public function getIndexAction()
     {
-        return 'SL & HR fiscaliazion service';
+        return view('Pckg/Pendo:pendo/index');
     }
 
 }

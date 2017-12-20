@@ -3,6 +3,7 @@
 use Pckg\Auth\Middleware\LoginWithApiKeyHeader;
 use Pckg\Auth\Provider\Auth;
 use Pckg\Framework\Provider;
+use Pckg\Generic\Provider\GenericPaths;
 use Pckg\Pendo\Provider\Pendo as PendoProvider;
 
 class Pendo extends Provider
@@ -12,14 +13,15 @@ class Pendo extends Provider
     {
         return [
             PendoProvider::class,
-            Auth::class,
+            //Auth::class,
+            GenericPaths::class,
         ];
     }
 
     public function middlewares()
     {
         return [
-            LoginWithApiKeyHeader::class,
+            // LoginWithApiKeyHeader::class,
         ];
     }
 
