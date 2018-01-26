@@ -1,0 +1,57 @@
+repository: git@github.com:pckg-app/pendo.git
+branch: master
+services:
+  web:
+    https: true
+  storage:
+    dir:
+      - storage
+      - storage/cache
+      - storage/cache/framework
+      - storage/cache/view
+  cron:
+    commands:
+      sth:
+        command: php $webDirconsole cron:run >> $logsDircron.log
+
+checkout:
+  type: standalone
+
+init:
+  - composer install --no-dev --prefer-dist --no-progress --no-suggest --optimize-autoloader --ignore-platform-reqs
+  - yarn install --production --silent
+
+prepare:
+  # chown to www-data:impero
+  - sudo chown www-data:impero . -R
+
+  # chown storage to www-data
+  - sudo chown www-data:www-data storage -R
+
+deploy:
+  # pull changes
+  - git pull --ff
+
+  # install dependency changes
+  - composer install --no-dev --prefer-dist --no-progress --no-suggest --optimize-autoloader --ignore-platform-reqs
+  - yarn install --production --silent
+
+migrate:
+  # import translations
+  #- php console $app translator:import
+
+  # import generic data
+  #- php console $app generic:import-actions
+  #- php console $app generic:import-lists
+
+  # clear cache
+  #- php console cache:clear
+
+  # install migrations
+  #- php console $app migrator:install --repository=default --fields --yes
+
+  # upgrade slugs
+  # - php console $app translator:upgrade-slugs
+
+  # clear cache
+  - php console cache:clear
