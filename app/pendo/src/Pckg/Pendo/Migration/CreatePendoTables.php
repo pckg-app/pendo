@@ -1,9 +1,19 @@
 <?php namespace Pckg\Pendo\Migration;
 
+use Pckg\Api\Migration\CreateApiTables;
+use Pckg\Auth\Migration\CreateAuthTables;
 use Pckg\Migration\Migration;
 
-class CreateFiscalizationTables extends Migration
+class CreatePendoTables extends Migration
 {
+
+    public function dependencies()
+    {
+        return [
+            CreateAuthTables::class,
+            CreateApiTables::class,
+        ];
+    }
 
     public function up()
     {

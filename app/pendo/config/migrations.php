@@ -1,7 +1,7 @@
 <?php
 
-use Pckg\Pendo\Migration\CreateFiscalizationTables;
+use Pckg\Pendo\Migration\CreatePendoTables;
 
 return [
-    CreateFiscalizationTables::class,
+    CreatePendoTables::class,
 ];

@@ -41,7 +41,8 @@
     "pelago/emogrifier": "^1.2",
     "symfony/dependency-injection": "3.3.*",
     "facebook/facebook-instant-articles-sdk-php": "dev-master",
-    "guzzlehttp/guzzle": "6.*"
+    "guzzlehttp/guzzle": "6.*",
+    "pckg-app/api": "dev-master"
   },
   "require-dev": {
     "codeception/codeception": "dev-master"

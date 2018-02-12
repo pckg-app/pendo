@@ -20,7 +20,8 @@ class Pendo extends Provider
             routeGroup([
                            'controller' => PendoController::class,
                        ], [
-                           'homepage' => route('/', 'index'),
+                           'homepage'  => route('/', 'index'),
+                           'configure' => route('/configure', 'configure'),
                        ]),
             /**
              * API routes.

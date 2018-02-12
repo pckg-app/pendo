@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "021e7b63d6a19903d4c72d9a936c3b48",
+    "content-hash": "d6c02a885f1a9dfbc6fe874702ecae11",
     "packages": [
         {
             "name": "aferrandini/phpqrcode",
@@ -1495,6 +1495,44 @@
                 "sdk"
             ],
             "time": "2017-11-13T19:21:59+00:00"
+        },
+        {
+            "name": "pckg-app/api",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pckg-app/api.git",
+                "reference": "e342808ab35e43d128bbdf6280c49cf9076bfe7a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pckg-app/api/zipball/e342808ab35e43d128bbdf6280c49cf9076bfe7a",
+                "reference": "e342808ab35e43d128bbdf6280c49cf9076bfe7a",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.3",
+                "pckg/database": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Pckg": "src\\"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bojan Rajh",
+                    "email": "schtr4jh@schtr4jh.net"
+                }
+            ],
+            "description": "Core api for pckg apps",
+            "homepage": "https://github.com/pckg-app/api",
+            "time": "2018-01-27T00:36:01+00:00"
         },
         {
             "name": "pckg/auth",
@@ -5723,6 +5761,7 @@
         "dimsemenov/magnific-popup": 20,
         "robrichards/xmlseclibs": 20,
         "facebook/facebook-instant-articles-sdk-php": 20,
+        "pckg-app/api": 20,
         "codeception/codeception": 20
     },
     "prefer-stable": false,

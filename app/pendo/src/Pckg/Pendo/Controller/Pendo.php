@@ -16,4 +16,9 @@ class Pendo
         return view('Pckg/Pendo:pendo/index');
     }
 
+    public function getConfigureAction()
+    {
+        return view('Pckg/Pendo:pendo/configure');
+    }
+
 }
