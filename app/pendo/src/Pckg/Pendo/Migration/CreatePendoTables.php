@@ -28,8 +28,8 @@ class CreatePendoTables extends Migration
         $fiscalizations->varchar('type');
         $fiscalizations->decimal('invoice');
         $fiscalizations->decimal('payment');
-        $fiscalizations->varchar('eor');
-        $fiscalizations->varchar('zoi');
+        $fiscalizations->varchar('eor', 255);
+        $fiscalizations->varchar('zoi', 255);
         $fiscalizations->integer('next_id');
         $fiscalizations->datetime('requested_at');
 
