@@ -9,6 +9,19 @@ services:
       - storage/cache
       - storage/cache/framework
       - storage/cache/view
+      - storage/cache/tmp
+      - storage/cache/www
+      - storage/cache/www/img
+      - storage/cache/www/css
+      - storage/cache/www/js
+      - storage/cache/www/less
+      - storage/private
+      - storage/uploads
+      - storage/tmp
+  web:
+    mount:
+      storage: $storageDirstorage
+    https: true
   cron:
     commands:
       sth:
