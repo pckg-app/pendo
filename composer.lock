@@ -1314,12 +1314,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "19714ba4cfc5b2b7a9a07854d946a591c30c3b3a"
+                "reference": "028b93a1d4c2d675771473675006e61ad54492ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/19714ba4cfc5b2b7a9a07854d946a591c30c3b3a",
-                "reference": "19714ba4cfc5b2b7a9a07854d946a591c30c3b3a",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/028b93a1d4c2d675771473675006e61ad54492ce",
+                "reference": "028b93a1d4c2d675771473675006e61ad54492ce",
                 "shasum": ""
             },
             "require": {
@@ -1359,7 +1359,7 @@
                 "datetime",
                 "time"
             ],
-            "time": "2018-02-17T07:10:47+00:00"
+            "time": "2018-02-17T21:58:44+00:00"
         },
         {
             "name": "paragonie/random_compat",
