@@ -16,9 +16,16 @@ class Pendo
         return view('Pckg/Pendo:pendo/index');
     }
 
-    public function getConfigureAction()
+    public function getConfigureAction($apiKey = null)
     {
-        return view('Pckg/Pendo:pendo/configure');
+        return view('Pckg/Pendo:pendo/configure', ['apiKey' => $apiKey]);
+    }
+
+    public function postConfigureAction()
+    {
+        /**
+         * Here we accept certificates and password and store them securely.
+         */
     }
 
 }
