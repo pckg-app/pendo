@@ -1720,12 +1720,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pckg/database.git",
-                "reference": "906fcd50f3821a7adebca4d1dccbbc3d8625c50e"
+                "reference": "a3194384bd00baf312a98d5451173c69c7629c76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pckg/database/zipball/906fcd50f3821a7adebca4d1dccbbc3d8625c50e",
-                "reference": "906fcd50f3821a7adebca4d1dccbbc3d8625c50e",
+                "url": "https://api.github.com/repos/pckg/database/zipball/a3194384bd00baf312a98d5451173c69c7629c76",
+                "reference": "a3194384bd00baf312a98d5451173c69c7629c76",
                 "shasum": ""
             },
             "require": {
@@ -1755,7 +1755,7 @@
             ],
             "description": "Just another php / orm / pdo implementation for simple and advanced data management",
             "homepage": "https://github.com/pckg/database",
-            "time": "2018-02-16T13:58:56+00:00"
+            "time": "2018-02-18T00:52:33+00:00"
         },
         {
             "name": "pckg/framework",
@@ -1812,12 +1812,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pckg/generic.git",
-                "reference": "9ba978e4ac8e059d89b434e6739b4e00c6ea06dd"
+                "reference": "eecbbaa75489f3ff4b4ce602395b90b76de22d33"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pckg/generic/zipball/9ba978e4ac8e059d89b434e6739b4e00c6ea06dd",
-                "reference": "9ba978e4ac8e059d89b434e6739b4e00c6ea06dd",
+                "url": "https://api.github.com/repos/pckg/generic/zipball/eecbbaa75489f3ff4b4ce602395b90b76de22d33",
+                "reference": "eecbbaa75489f3ff4b4ce602395b90b76de22d33",
                 "shasum": ""
             },
             "require": {
@@ -1843,7 +1843,7 @@
             ],
             "description": "Building admin interface and generic frontend made simple",
             "homepage": "https://github.com/pckg/generic",
-            "time": "2018-02-17T20:04:45+00:00"
+            "time": "2018-02-18T13:38:12+00:00"
         },
         {
             "name": "pckg/helpers-js",
@@ -2098,12 +2098,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pckg/migrator.git",
-                "reference": "34ed6031c06d4ad5b01c37f2a82dabcb682423c1"
+                "reference": "450ac7ac40c5e6ffc0c4a9a9f6f84aa1ea7f2958"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pckg/migrator/zipball/34ed6031c06d4ad5b01c37f2a82dabcb682423c1",
-                "reference": "34ed6031c06d4ad5b01c37f2a82dabcb682423c1",
+                "url": "https://api.github.com/repos/pckg/migrator/zipball/450ac7ac40c5e6ffc0c4a9a9f6f84aa1ea7f2958",
+                "reference": "450ac7ac40c5e6ffc0c4a9a9f6f84aa1ea7f2958",
                 "shasum": ""
             },
             "require": {
@@ -2128,7 +2128,7 @@
             ],
             "description": "Database and config migrations made simple",
             "homepage": "https://github.com/pckg/migrator",
-            "time": "2018-02-03T14:23:20+00:00"
+            "time": "2018-02-18T13:44:11+00:00"
         },
         {
             "name": "pckg/payment",
