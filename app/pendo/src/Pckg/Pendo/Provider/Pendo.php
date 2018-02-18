@@ -7,6 +7,7 @@ use Pckg\Pendo\Controller\Business;
 use Pckg\Pendo\Controller\Company;
 use Pckg\Pendo\Controller\Invoice;
 use Pckg\Pendo\Controller\Pendo as PendoController;
+use Pckg\Pendo\Resolver\ApiKey;
 
 class Pendo extends Provider
 {
@@ -22,7 +23,9 @@ class Pendo extends Provider
                        ], [
                            'homepage'       => route('/', 'index'),
                            'configureEmpty' => route('/configure', 'configure'),
-                           'configure'      => route('/configure/[apiKey]', 'configure'),
+                           'configure'      => route('/configure/[apiKey]', 'configure')->resolvers([
+                                                                                                        'apiKey' => ApiKey::class,
+                                                                                                    ]),
                        ]),
             /**
              * API routes.

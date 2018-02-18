@@ -53,6 +53,9 @@ class CreatePendoTables extends Migration
         $countries->text('fiscalization_footer');
         $countries->varchar('code', 8);
 
+        $apps = $this->table('apps');
+        $apps->integer('company_id')->references('companies');
+
         $this->save();
     }
 
