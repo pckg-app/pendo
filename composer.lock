@@ -1812,12 +1812,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pckg/generic.git",
-                "reference": "eecbbaa75489f3ff4b4ce602395b90b76de22d33"
+                "reference": "8349385569beb7b82ee15d25c14a0246e8a56590"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pckg/generic/zipball/eecbbaa75489f3ff4b4ce602395b90b76de22d33",
-                "reference": "eecbbaa75489f3ff4b4ce602395b90b76de22d33",
+                "url": "https://api.github.com/repos/pckg/generic/zipball/8349385569beb7b82ee15d25c14a0246e8a56590",
+                "reference": "8349385569beb7b82ee15d25c14a0246e8a56590",
                 "shasum": ""
             },
             "require": {
@@ -1843,7 +1843,7 @@
             ],
             "description": "Building admin interface and generic frontend made simple",
             "homepage": "https://github.com/pckg/generic",
-            "time": "2018-02-18T13:38:12+00:00"
+            "time": "2018-02-19T09:23:47+00:00"
         },
         {
             "name": "pckg/helpers-js",
@@ -1988,12 +1988,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pckg/locale.git",
-                "reference": "ae86f7a5bcca8a4b13f8fe0d23bd7913a0344a2f"
+                "reference": "ada9a2598ce57360b3b4ae9cdcf079d99878e8e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pckg/locale/zipball/ae86f7a5bcca8a4b13f8fe0d23bd7913a0344a2f",
-                "reference": "ae86f7a5bcca8a4b13f8fe0d23bd7913a0344a2f",
+                "url": "https://api.github.com/repos/pckg/locale/zipball/ada9a2598ce57360b3b4ae9cdcf079d99878e8e4",
+                "reference": "ada9a2598ce57360b3b4ae9cdcf079d99878e8e4",
                 "shasum": ""
             },
             "type": "library",
@@ -2014,7 +2014,7 @@
             ],
             "description": "PHP locale",
             "homepage": "https://github.com/pckg/locale",
-            "time": "2018-02-17T10:23:59+00:00"
+            "time": "2018-02-18T18:29:27+00:00"
         },
         {
             "name": "pckg/mail",
@@ -2061,12 +2061,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pckg/manager.git",
-                "reference": "a1d2813a7c691b0a2cbf20f0390334043be7be82"
+                "reference": "ba0dddbf237c373d0c63267fa432fb354eb3bf0b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pckg/manager/zipball/a1d2813a7c691b0a2cbf20f0390334043be7be82",
-                "reference": "a1d2813a7c691b0a2cbf20f0390334043be7be82",
+                "url": "https://api.github.com/repos/pckg/manager/zipball/ba0dddbf237c373d0c63267fa432fb354eb3bf0b",
+                "reference": "ba0dddbf237c373d0c63267fa432fb354eb3bf0b",
                 "shasum": ""
             },
             "require": {
@@ -2090,7 +2090,7 @@
             ],
             "description": "Asset management, meta / seo, locale, vue.js and everything else that projects need to manage",
             "homepage": "https://github.com/pckg/manager",
-            "time": "2018-02-17T19:27:04+00:00"
+            "time": "2018-02-19T09:24:14+00:00"
         },
         {
             "name": "pckg/migrator",
@@ -4018,12 +4018,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/facebook/php-webdriver.git",
-                "reference": "9439246f60fc1396800921fe8db2489d79eb18b5"
+                "reference": "b231f09ae6f311a52bed15b01e19a4eaf183f9a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facebook/php-webdriver/zipball/9439246f60fc1396800921fe8db2489d79eb18b5",
-                "reference": "9439246f60fc1396800921fe8db2489d79eb18b5",
+                "url": "https://api.github.com/repos/facebook/php-webdriver/zipball/b231f09ae6f311a52bed15b01e19a4eaf183f9a8",
+                "reference": "b231f09ae6f311a52bed15b01e19a4eaf183f9a8",
                 "shasum": ""
             },
             "require": {
@@ -4066,7 +4066,7 @@
                 "selenium",
                 "webdriver"
             ],
-            "time": "2018-02-17T03:32:56+00:00"
+            "time": "2018-02-18T16:31:19+00:00"
         },
         {
             "name": "myclabs/deep-copy",
