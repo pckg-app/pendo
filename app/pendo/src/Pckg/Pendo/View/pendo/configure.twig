@@ -6,11 +6,44 @@
 
 {% if appKey %}
     <div>
-        <p><b>App:</b> {{ appKey.app.title }}</p>
-        <p><b>Key:</b> {{ appKey.key }}</p>
-        <p><b>User:</b> {{ appKey.app.user.email }}</p>
-        <p><b>Pass:</b> {{ appKey.app.company.decodedPassword }}</p>
-        {{ configureForm | raw }}
+        {% if appKey.app.company.p12 and appKey.app.company.pem and appKey.app.company.server and appKey.app.company.password %}
+            <div class="alert alert-success">Certificates and password ok</div>
+        {% else %}
+            <div class="alert alert-danger">Missing certificate(s) and / or password</div>
+        {% endif %}
+
+        {{ configureForm.open() | raw }}
+
+        <div class="form-group">
+            <label>Key</label>
+            <div>{{ appKey.key }}</div>
+        </div>
+
+        <div class="form-group">
+            <label>App</label>
+            <div>{{ appKey.app.title }}</div>
+        </div>
+
+        <div class="form-group">
+            <label>Country</label>
+            <div>{{ appKey.app.company.country.code }}</div>
+        </div>
+
+        <div class="form-group">
+            <label>User</label>
+            <div>{{ appKey.app.user.email }}</div>
+        </div>
+
+        <div class="form-group">
+            <label>Pass</label>
+            <div>{{ appKey.app.company.invisiblePassword }}</div>
+        </div>
+
+        <div class="alert alert-info">
+            {{ configureForm | raw }}
+        </div>
+        
+        {{ configureForm.close() | raw }}
     </div>
 {% else %}
     <div>

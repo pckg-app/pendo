@@ -62,4 +62,11 @@ class Company extends Record
         return Crypto::decrypt($this->password, Key::loadFromAsciiSafeString($this->hash));
     }
 
+    public function getInvisiblePasswordAttribute()
+    {
+        $pass = $this->getDecodedPasswordAttribute();
+
+        return substr($pass, 0, 1) . '******' . substr($pass, strlen($pass) - 1);
+    }
+
 }
