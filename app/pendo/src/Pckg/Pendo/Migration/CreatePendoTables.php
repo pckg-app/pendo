@@ -48,7 +48,7 @@ class CreatePendoTables extends Migration
         $companies->integer('country_id');
         $companies->varchar('representative');
         $companies->varchar('hash', 512)->unique();
-        $companies->varchar('password', 255);
+        $companies->varchar('password', 512);
         $companies->varchar('p12');
         $companies->varchar('pem');
         $companies->varchar('server');

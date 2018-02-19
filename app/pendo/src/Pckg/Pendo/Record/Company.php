@@ -7,6 +7,7 @@ use Pckg\Database\Record;
 use Pckg\Pendo\Entity\Companies;
 use Pckg\Pendo\Service\Fiscalization\Business;
 use Pckg\Pendo\Service\Fiscalization\Config;
+use Pckg\Pendo\Service\Fiscalization\Invoice;
 use Pckg\Pendo\Service\Fiscalization\Service\Furs;
 use Pckg\Pendo\Service\Fiscalization\Service\Purh;
 use Throwable;
@@ -15,15 +16,6 @@ class Company extends Record
 {
 
     protected $entity = Companies::class;
-
-    public function getCertificatePassword()
-    {
-        try {
-            return Crypto::decrypt($this->cert_password, Key::loadFromAsciiSafeString(config('security.key')));
-        } catch (Throwable $e) {
-            throw new Exception('Error decrypting certificate key', null, $e);
-        }
-    }
 
     public function getCountryCode()
     {
@@ -43,16 +35,16 @@ class Company extends Record
 
     public function getFisclizationConfig()
     {
-        $key = $this->getCertificatePassword();
+        $key = $this->getDecodedPasswordAttribute();
 
         $certsPath = path('app_private') . 'certs' . path('ds');
 
         return new Config(
             $this->vat_number,
-            $certsPath . $this->pem_cert,
-            $certsPath . $this->p12_cert,
+            $certsPath . $this->pem,
+            $certsPath . $this->p12,
             $key,
-            $certsPath . $this->server_cert,
+            $certsPath . $this->server,
             config('derive.fiscalization.softwareSupplierTaxNumber')
         );
     }
@@ -67,6 +59,21 @@ class Company extends Record
         $pass = $this->getDecodedPasswordAttribute();
 
         return substr($pass, 0, 1) . '******' . substr($pass, strlen($pass) - 1);
+    }
+
+    public function createFiscalizationBusiness()
+    {
+        return new Business(
+            $this->fiscalization_business ?? 'PP2',
+            substr($this->vat_number, 2), // remove SI, HR from starting of vat number
+            date('Y-m-d', strtotime($this->incorporated_at)),
+            $this->fiscalization_device ?? 1
+        );
+    }
+
+    public function createFiscalizationService(Business $business, Invoice $invoice)
+    {
+        return $this->country->createFiscalizationService($business, $invoice, $this);
     }
 
 }

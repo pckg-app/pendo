@@ -166,7 +166,7 @@ class Purh extends AbstractService
 
     public function makeRequest()
     {
-        d('message', $this->xmlMessage);
+        // d('message', $this->xmlMessage);
 
         $ch = curl_init();
         $options = [
@@ -179,18 +179,18 @@ class Purh extends AbstractService
             CURLOPT_SSL_VERIFYHOST    => 2,
             CURLOPT_SSL_VERIFYPEER    => true,
             CURLOPT_CAINFO            => $this->config->getServerCert(),
-            CURLOPT_VERBOSE           => true,//dev() ? true : false,
+            CURLOPT_VERBOSE           => dev() ? true : false,
         ];
         curl_setopt_array($ch, $options);
         $response = curl_exec($ch);
         if ($response) {
-            d($response);
+            //d("response", $response);
             $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             $DOMResponse = new DOMDocument();
             $DOMResponse->loadXML($response);
             if ($code === 200) {
                 /* For RacunZahtjev */
-                $this->zoi = $DOMResponse->getElementsByTagName('Jir')->item(0);
+                $this->zoi = $DOMResponse->getElementsByTagName('Jir')->item(0)->nodeValue;
             } else {
                 $SifraGreske = $DOMResponse->getElementsByTagName('SifraGreske')->item(0);
                 $PorukaGreske = $DOMResponse->getElementsByTagName('PorukaGreske')->item(0);
@@ -238,7 +238,10 @@ class Purh extends AbstractService
     public function envelopeDocument()
     {
         if (in_array($this->xmlRequestType, ['EchoRequest'])) {
-            // return;
+
+            $XMLRequestDOMDoc = new DOMDocument();
+            $XMLRequestDOMDoc->loadXML($this->xmlMessage);
+            $this->xmlMessage = $XMLRequestDOMDoc;
         }
 
         $envelope = new DOMDocument();
@@ -316,7 +319,6 @@ class Purh extends AbstractService
         $X509IssuerSerialNode->appendChild($X509IssuerNameNode);
         $X509SerialNumberNode = new DOMElement('X509SerialNumber', $X509IssuerSerial);
         $X509IssuerSerialNode->appendChild($X509SerialNumberNode);
-
         $this->xmlMessage = $XMLRequestDOMDoc;
     }
 

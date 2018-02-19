@@ -1,6 +1,7 @@
 <?php namespace Pckg\Pendo\Controller;
 
 use Exception;
+use Pckg\Pendo\Record\AppKey;
 use Pckg\Pendo\Record\Business;
 use Pckg\Pendo\Record\Company;
 use Pckg\Pendo\Service\Fiscalizator;
@@ -16,15 +17,12 @@ class Invoice
     /**
      * @throws Exception
      */
-    public function postConfirmAction()
+    public function postConfirmAction(AppKey $appKey)
     {
         /**
          * Get posted data.
          */
         $keys = [
-            'vat_number',
-            'business',
-            'device',
             'datetime',
             'platform',
             'identifier',
@@ -46,9 +44,17 @@ class Invoice
         /**
          * Get company or throw exception.
          */
-        $company = Company::getOrFail(['vat_number' => $invoiceData['vat_number']], null, function() {
-            throw new Exception('Company is not registered');
-        });
+        $company = $appKey->app->company;
+        if (!$company) {
+            throw new Exception("First register company");
+        }
+
+        /**
+         * Get some data from apiKey.
+         */
+        $invoiceData['vat_number'] = $appKey->app->company->vat_number;
+        $invoiceData['business'] = $appKey->app->company->business;
+        $invoiceData['device'] = $appKey->app->company->device;
 
         /**
          * Get business or throw exception.

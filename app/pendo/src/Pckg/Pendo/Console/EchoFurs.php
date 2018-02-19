@@ -39,6 +39,7 @@ class EchoFurs extends Command
         $furs->postXml();
         $response = $furs->getXmlResponse();
         echo $response;
+        die("ok echo");
 
         /**
          * Create business message and throw exception if something is not ok.

@@ -39,10 +39,10 @@ class EchoPurh extends Command
          * Create echo message and throw exception if something is not ok.
          * Echo works.
          */
-        $fiscalizationService->createEchoMsg();
+        /*$fiscalizationService->createEchoMsg();
         $fiscalizationService->postXml();
         $response = $fiscalizationService->getXmlResponse();
-        echo $response;
+        echo $response;*/
 
         /**
          * Create business message and throw exception if something is not ok.
@@ -61,6 +61,7 @@ class EchoPurh extends Command
         $fiscalizationService->postXml();
         $response = $fiscalizationService->getXmlResponse();
         echo $response;
+        d($fiscalizationService->getZoi());
     }
 
 }

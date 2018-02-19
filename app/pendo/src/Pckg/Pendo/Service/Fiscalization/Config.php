@@ -61,4 +61,10 @@ class Config
         return $this->softwareSupplierTaxNumber;
     }
 
+    public function getUrl()
+    {
+        return 'https://cistest.apis-it.hr:8449/FiskalizacijaServiceTest';
+        return 'https://blagajne-test.fu.gov.si:9002/v1/cash_registers';
+    }
+
 }
