@@ -7,6 +7,7 @@ use Pckg\Pendo\Controller\Business;
 use Pckg\Pendo\Controller\Company;
 use Pckg\Pendo\Controller\Invoice;
 use Pckg\Pendo\Controller\Pendo as PendoController;
+use Pckg\Pendo\Resolver\ApiKey;
 use Pckg\Pendo\Resolver\ApiKeyParameter;
 
 class Pendo extends Provider
@@ -50,6 +51,13 @@ class Pendo extends Provider
                            'namePrefix' => 'api.invoice',
                        ], [
                            '.confirm' => route('/confirm', 'confirm'),
+                       ]),
+            routeGroup([
+                           'controller' => PendoController::class,
+                           'urlPrefix'  => '/api/fiscalizations',
+                           'namePrefix' => 'api.fiscalizations',
+                       ], [
+                           '' => route('', 'fiscalizations')->resolvers([ApiKey::class]),
                        ]),
         ];
     }

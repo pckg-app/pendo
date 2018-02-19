@@ -1,6 +1,7 @@
 <?php
 
 use Pckg\Auth\Middleware\LoginWithApiKeyHeader;
+use Pckg\Auth\Middleware\RegisterApiKeyHeader;
 use Pckg\Auth\Provider\Auth;
 use Pckg\Framework\Provider;
 use Pckg\Framework\Provider\Framework;
@@ -30,6 +31,7 @@ class Pendo extends Provider
     {
         return [
             LoginWithApiKeyHeader::class,
+            RegisterApiKeyHeader::class,
             RegisterCoreAssets::class,
         ];
     }

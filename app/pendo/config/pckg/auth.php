@@ -63,4 +63,6 @@ return [
         ],
     ],
     'getParameter' => 'autologin',
+    'apiHeader'    => 'X-Pendo-Api-Key',
+    'appEntity'    => \Pckg\Pendo\Entity\AppKeys::class,
 ];

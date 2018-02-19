@@ -3,6 +3,7 @@
 use Defuse\Crypto\Crypto;
 use Defuse\Crypto\Key;
 use Pckg\Manager\Upload;
+use Pckg\Pendo\Entity\Fiscalizations;
 use Pckg\Pendo\Form\Configure;
 use Pckg\Pendo\Record\AppKey;
 
@@ -63,4 +64,13 @@ class Pendo
         return response()->respondWithSuccessRedirect();
     }
 
+    public function getFiscalizationsAction(AppKey $appKey)
+    {
+        $fiscalizations = (new Fiscalizations())->where('business_tax_number', $appKey->app->company->vat_number)
+                                                ->limit(500)
+                                                ->orderBy('id DESC')
+                                                ->all();
+
+        return ['fiscalizations' => $fiscalizations];
+    }
 }
