@@ -2061,12 +2061,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pckg/manager.git",
-                "reference": "ba0dddbf237c373d0c63267fa432fb354eb3bf0b"
+                "reference": "3bd7ecbe0764acec68091ce509daa32c66bad30e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pckg/manager/zipball/ba0dddbf237c373d0c63267fa432fb354eb3bf0b",
-                "reference": "ba0dddbf237c373d0c63267fa432fb354eb3bf0b",
+                "url": "https://api.github.com/repos/pckg/manager/zipball/3bd7ecbe0764acec68091ce509daa32c66bad30e",
+                "reference": "3bd7ecbe0764acec68091ce509daa32c66bad30e",
                 "shasum": ""
             },
             "require": {
@@ -2090,7 +2090,7 @@
             ],
             "description": "Asset management, meta / seo, locale, vue.js and everything else that projects need to manage",
             "homepage": "https://github.com/pckg/manager",
-            "time": "2018-02-19T09:24:14+00:00"
+            "time": "2018-02-19T10:20:01+00:00"
         },
         {
             "name": "pckg/migrator",
@@ -2098,12 +2098,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pckg/migrator.git",
-                "reference": "450ac7ac40c5e6ffc0c4a9a9f6f84aa1ea7f2958"
+                "reference": "25f36d5d8b4066bac708c539f740682fffc41f6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pckg/migrator/zipball/450ac7ac40c5e6ffc0c4a9a9f6f84aa1ea7f2958",
-                "reference": "450ac7ac40c5e6ffc0c4a9a9f6f84aa1ea7f2958",
+                "url": "https://api.github.com/repos/pckg/migrator/zipball/25f36d5d8b4066bac708c539f740682fffc41f6a",
+                "reference": "25f36d5d8b4066bac708c539f740682fffc41f6a",
                 "shasum": ""
             },
             "require": {
@@ -2128,7 +2128,7 @@
             ],
             "description": "Database and config migrations made simple",
             "homepage": "https://github.com/pckg/migrator",
-            "time": "2018-02-18T13:44:11+00:00"
+            "time": "2018-02-19T10:20:23+00:00"
         },
         {
             "name": "pckg/payment",
@@ -4373,12 +4373,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "9f901e29c93dae4aa77c0bb161df4276f9c9a1be"
+                "reference": "dfd6be44111a7c41c2e884a336cc4f461b3b2401"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/9f901e29c93dae4aa77c0bb161df4276f9c9a1be",
-                "reference": "9f901e29c93dae4aa77c0bb161df4276f9c9a1be",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/dfd6be44111a7c41c2e884a336cc4f461b3b2401",
+                "reference": "dfd6be44111a7c41c2e884a336cc4f461b3b2401",
                 "shasum": ""
             },
             "require": {
@@ -4428,7 +4428,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2018-02-11T18:49:29+00:00"
+            "time": "2018-02-19T10:16:54+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
