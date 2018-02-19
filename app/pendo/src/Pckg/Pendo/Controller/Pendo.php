@@ -36,16 +36,19 @@ class Pendo
         $asciiKey = $key->saveToAsciiSafeString();
 
         $files = ['p12', 'pem', 'server'];
-        $data = ['password' => Crypto::encrypt(post('password'), $key), 'hash' => $asciiKey];
+        $data = post('password')
+            ? [
+                'password' => Crypto::encrypt(post('password'), $key),
+                'hash'     => $asciiKey,
+            ]
+            : [];
+        $uploads = [];
         foreach ($files as $file) {
-            $upload = new Upload($file);
+            $uploads[$file] = $upload = new Upload($file);
             $success = $upload->validateUpload();
 
             if ($success !== true) {
-                return [
-                    'success' => false,
-                    'message' => $success,
-                ];
+                continue;
             }
 
             $dir = path('app_private') . 'company' . path('ds') . 'certificate' . path('ds');
@@ -54,6 +57,10 @@ class Pendo
 
             $data[$file] = $upload->getUploadedFilename();
         }
+
+        $appKey->app->company->setAndSave($data);
+
+        return response()->respondWithSuccessRedirect();
     }
 
 }

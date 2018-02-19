@@ -9,6 +9,7 @@
         <p><b>App:</b> {{ appKey.app.title }}</p>
         <p><b>Key:</b> {{ appKey.key }}</p>
         <p><b>User:</b> {{ appKey.app.user.email }}</p>
+        <p><b>Pass:</b> {{ appKey.app.company.decodedPassword }}</p>
         {{ configureForm | raw }}
     </div>
 {% else %}

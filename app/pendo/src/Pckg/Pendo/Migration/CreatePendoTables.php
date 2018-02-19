@@ -34,7 +34,6 @@ class CreatePendoTables extends Migration
         $fiscalizations->datetime('requested_at');
 
         $companies = $this->table('companies');
-        $companies->varchar('hash', 512)->unique();
         $companies->integer('user_id')->references('users');
         $companies->varchar('long_name');
         $companies->varchar('short_name');
@@ -48,6 +47,11 @@ class CreatePendoTables extends Migration
         $companies->datetime('incorporated_at');
         $companies->integer('country_id');
         $companies->varchar('representative');
+        $companies->varchar('hash', 512)->unique();
+        $companies->varchar('password', 255);
+        $companies->varchar('p12');
+        $companies->varchar('pem');
+        $companies->varchar('server');
 
         $countries = $this->table('countries');
         $countries->boolean('default');

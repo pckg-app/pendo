@@ -57,4 +57,9 @@ class Company extends Record
         );
     }
 
+    public function getDecodedPasswordAttribute()
+    {
+        return Crypto::decrypt($this->password, Key::loadFromAsciiSafeString($this->hash));
+    }
+
 }
