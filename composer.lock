@@ -2061,12 +2061,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pckg/manager.git",
-                "reference": "3bd7ecbe0764acec68091ce509daa32c66bad30e"
+                "reference": "373277c55f3878011d99ef893be23f8642986d21"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pckg/manager/zipball/3bd7ecbe0764acec68091ce509daa32c66bad30e",
-                "reference": "3bd7ecbe0764acec68091ce509daa32c66bad30e",
+                "url": "https://api.github.com/repos/pckg/manager/zipball/373277c55f3878011d99ef893be23f8642986d21",
+                "reference": "373277c55f3878011d99ef893be23f8642986d21",
                 "shasum": ""
             },
             "require": {
@@ -2090,7 +2090,7 @@
             ],
             "description": "Asset management, meta / seo, locale, vue.js and everything else that projects need to manage",
             "homepage": "https://github.com/pckg/manager",
-            "time": "2018-02-19T10:20:01+00:00"
+            "time": "2018-02-19T11:03:56+00:00"
         },
         {
             "name": "pckg/migrator",
