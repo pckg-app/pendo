@@ -34,6 +34,8 @@ class CreatePendoTables extends Migration
         $fiscalizations->datetime('requested_at');
 
         $companies = $this->table('companies');
+        $companies->varchar('hash', 512)->unique();
+        $companies->integer('user_id')->references('users');
         $companies->varchar('long_name');
         $companies->varchar('short_name');
         $companies->varchar('vat_number');

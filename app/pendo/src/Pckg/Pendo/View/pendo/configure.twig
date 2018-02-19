@@ -6,7 +6,9 @@
 
 {% if appKey %}
     <div>
-        {{ appKey.key }}
+        <p><b>App:</b> {{ appKey.app.title }}</p>
+        <p><b>Key:</b> {{ appKey.key }}</p>
+        <p><b>User:</b> {{ appKey.app.user.email }}</p>
         {{ configureForm | raw }}
     </div>
 {% else %}
