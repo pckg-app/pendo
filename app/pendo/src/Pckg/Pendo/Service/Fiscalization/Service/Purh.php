@@ -179,7 +179,7 @@ class Purh extends AbstractService
             CURLOPT_SSL_VERIFYHOST    => 2,
             CURLOPT_SSL_VERIFYPEER    => true,
             CURLOPT_CAINFO            => $this->config->getServerCert(),
-            CURLOPT_VERBOSE           => dev() ? true : false,
+            CURLOPT_VERBOSE           => false,
         ];
         curl_setopt_array($ch, $options);
         $this->xmlResponse = $response = curl_exec($ch);
@@ -190,7 +190,7 @@ class Purh extends AbstractService
             $DOMResponse->loadXML($response);
             if ($code === 200) {
                 /* For RacunZahtjev */
-                $this->zoi = $DOMResponse->getElementsByTagName('Jir')->item(0)->nodeValue ?? null;
+                $this->eor = $DOMResponse->getElementsByTagName('Jir')->item(0)->nodeValue ?? null;
             } else {
                 $SifraGreske = $DOMResponse->getElementsByTagName('SifraGreske')->item(0);
                 $PorukaGreske = $DOMResponse->getElementsByTagName('PorukaGreske')->item(0);

@@ -588,7 +588,8 @@ class Furs extends AbstractService
                 CURLOPT_SSLCERT           => $this->config->getPemCert(),
                 CURLOPT_SSLCERTPASSWD     => $this->config->getPassword(),
                 CURLOPT_CAINFO            => $this->config->getServerCert(),
-                CURLOPT_VERBOSE           => true,//dev() ? true : false,
+                CURLOPT_VERBOSE           => false,
+                //dev() ? true : false,
                 //CURLOPT_SSLVERSION => 4
                 //CURLOPT_CAINFO => 'cert/furs_server.pem', //prevejanje server certifikata - uporabi: openssl x509 -inform der -in sitest-ca.cer -out furs_server.pem
                 //CURLOPT_SSLCERT => 'cert/furs_client.pem', //dodas svoj certifikat - uporabi: openssl pkcs12 -in ****.p12 -out furs_client.pem -password pass:*****
@@ -596,7 +597,6 @@ class Furs extends AbstractService
             //d("Request", $this->xmlMessage);
             curl_setopt_array($conn, $settings);
             $this->xmlResponse = curl_exec($conn);
-            //dd("Response", $this->xmlResponse, curl_error($conn), curl_errno($conn));
             if ($this->xmlResponse) {
                 $doc = new DOMDocument('1.0', 'UTF-8');
                 $doc->loadXML($this->xmlResponse);
@@ -631,6 +631,10 @@ class Furs extends AbstractService
 
     protected function saveResponse($doc, $type)
     {
+        if (!is_dir($this->xmlsPath)) {
+            @mkdir($this->xmlsPath, 0755, true);
+        }
+
         $doc->save(
             $this->xmlsPath . date('Ymdhis') . '_' . substr(sha1($this->msgIdentifier), 0, 6) . '_' . $type . '.xml'
         );
