@@ -10,13 +10,13 @@ use Symfony\Component\Console\Input\InputOption;
  *
  * @package Pckg\Pendo\Console
  */
-class EchoPurh extends Command
+class InvoicePurh extends Command
 {
 
     protected function configure()
     {
-        $this->setName('purh:echo')
-             ->setDescription('Check purh echo call')
+        $this->setName('purh:invoice')
+             ->setDescription('Check purh invoice call')
              ->addOptions([
                               'company' => 'Company id',
                           ], InputOption::VALUE_REQUIRED);
@@ -36,13 +36,13 @@ class EchoPurh extends Command
         $fiscalizationService = $company->createFiscalizationService($business, $invoice);
 
         /**
-         * Create echo message and throw exception if something is not ok.
-         * Echo works.
+         * Create invoice message and throw exception if something is not ok.
+         * Invoice works.
          */
-        $fiscalizationService->createEchoMsg();
+        $fiscalizationService->createInvoiceMsg();
         $fiscalizationService->postXml();
-        $response = $fiscalizationService->getXmlResponse();
-        echo strip_tags($response);
+        $fiscalizationService->getXmlResponse();
+        echo $fiscalizationService->getZoi();
     }
 
 }

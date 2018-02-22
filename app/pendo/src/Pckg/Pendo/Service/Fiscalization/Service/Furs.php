@@ -572,40 +572,47 @@ class Furs extends AbstractService
 
     public function makeRequest()
     {
-        $conn = curl_init();
-        $settings = [
-            CURLOPT_URL               => $this->config->getUrl(),
-            CURLOPT_FRESH_CONNECT     => true,
-            CURLOPT_CONNECTTIMEOUT_MS => 10000,
-            CURLOPT_TIMEOUT_MS        => 10000,
-            CURLOPT_RETURNTRANSFER    => true,
-            CURLOPT_POST              => 1,
-            CURLOPT_HTTPHEADER        => $this->urlPostHeader,
-            CURLOPT_POSTFIELDS        => $this->xmlMessage,
-            CURLOPT_SSL_VERIFYHOST    => 2,
-            CURLOPT_SSL_VERIFYPEER    => true,
-            CURLOPT_SSLCERT           => $this->config->getPemCert(),
-            CURLOPT_SSLCERTPASSWD     => $this->config->getPassword(),
-            CURLOPT_CAINFO            => $this->config->getServerCert(),
-            //CURLOPT_VERBOSE           => true,//dev() ? true : false,
-        ];
-        //d("Request", $this->xmlMessage);
-        curl_setopt_array($conn, $settings);
-        $this->xmlResponse = curl_exec($conn);
-        //d("Response", $this->xmlResponse);
-        if ($this->xmlResponse) {
-            $doc = new DOMDocument('1.0', 'UTF-8');
-            $doc->loadXML($this->xmlResponse);
-            $this->saveResponse($doc, 'generated');
-            if (isset($this->invoice)) {
-                $xpath = new DOMXPath($doc);
-                $nodeset = $xpath->query("//fu:UniqueInvoiceID")->item(0);
-                $this->eor = $nodeset->nodeValue ?? null;
+        try {
+            $conn = curl_init();
+            $settings = [
+                CURLOPT_URL               => $this->config->getUrl(),
+                CURLOPT_FRESH_CONNECT     => true,
+                CURLOPT_CONNECTTIMEOUT_MS => 10000,
+                CURLOPT_TIMEOUT_MS        => 10000,
+                CURLOPT_RETURNTRANSFER    => true,
+                CURLOPT_POST              => 1,
+                CURLOPT_HTTPHEADER        => $this->urlPostHeader,
+                CURLOPT_POSTFIELDS        => $this->xmlMessage,
+                CURLOPT_SSL_VERIFYHOST    => 2,
+                CURLOPT_SSL_VERIFYPEER    => true,
+                CURLOPT_SSLCERT           => $this->config->getPemCert(),
+                CURLOPT_SSLCERTPASSWD     => $this->config->getPassword(),
+                CURLOPT_CAINFO            => $this->config->getServerCert(),
+                CURLOPT_VERBOSE           => true,//dev() ? true : false,
+                //CURLOPT_SSLVERSION => 4
+                //CURLOPT_CAINFO => 'cert/furs_server.pem', //prevejanje server certifikata - uporabi: openssl x509 -inform der -in sitest-ca.cer -out furs_server.pem
+                //CURLOPT_SSLCERT => 'cert/furs_client.pem', //dodas svoj certifikat - uporabi: openssl pkcs12 -in ****.p12 -out furs_client.pem -password pass:*****
+            ];
+            //d("Request", $this->xmlMessage);
+            curl_setopt_array($conn, $settings);
+            $this->xmlResponse = curl_exec($conn);
+            //dd("Response", $this->xmlResponse, curl_error($conn), curl_errno($conn));
+            if ($this->xmlResponse) {
+                $doc = new DOMDocument('1.0', 'UTF-8');
+                $doc->loadXML($this->xmlResponse);
+                $this->saveResponse($doc, 'generated');
+                if (isset($this->invoice)) {
+                    $xpath = new DOMXPath($doc);
+                    $nodeset = $xpath->query("//fu:UniqueInvoiceID")->item(0);
+                    $this->eor = $nodeset->nodeValue ?? null;
+                }
+            } else {
+                var_dump(curl_error($conn));
             }
-        } else {
-            var_dump(curl_error($conn));
+            curl_close($conn);
+        } catch (\Throwable $e) {
+            dd(exception($e));
         }
-        curl_close($conn);
     }
 
     public function getEcho()

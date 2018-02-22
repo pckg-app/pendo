@@ -182,15 +182,15 @@ class Purh extends AbstractService
             CURLOPT_VERBOSE           => dev() ? true : false,
         ];
         curl_setopt_array($ch, $options);
-        $response = curl_exec($ch);
+        $this->xmlResponse = $response = curl_exec($ch);
+        //d("response", $response);
         if ($response) {
-            //d("response", $response);
             $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             $DOMResponse = new DOMDocument();
             $DOMResponse->loadXML($response);
             if ($code === 200) {
                 /* For RacunZahtjev */
-                $this->zoi = $DOMResponse->getElementsByTagName('Jir')->item(0)->nodeValue;
+                $this->zoi = $DOMResponse->getElementsByTagName('Jir')->item(0)->nodeValue ?? null;
             } else {
                 $SifraGreske = $DOMResponse->getElementsByTagName('SifraGreske')->item(0);
                 $PorukaGreske = $DOMResponse->getElementsByTagName('PorukaGreske')->item(0);

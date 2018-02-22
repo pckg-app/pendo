@@ -3,6 +3,7 @@
 use Pckg\Framework\Provider;
 use Pckg\Pendo\Console\EchoFurs;
 use Pckg\Pendo\Console\EchoPurh;
+use Pckg\Pendo\Console\InvoicePurh;
 use Pckg\Pendo\Controller\Business;
 use Pckg\Pendo\Controller\Company;
 use Pckg\Pendo\Controller\Invoice;
@@ -59,6 +60,13 @@ class Pendo extends Provider
                        ], [
                            '' => route('', 'fiscalizations')->resolvers([ApiKey::class]),
                        ]),
+            routeGroup([
+                           'controller' => PendoController::class,
+                           'urlPrefix'  => '/check',
+                           'namePrefix' => 'check',
+                       ], [
+                           '' => route('', 'check'),
+                       ]),
         ];
     }
 
@@ -66,6 +74,7 @@ class Pendo extends Provider
     {
         return [
             EchoPurh::class,
+            InvoicePurh::class,
             EchoFurs::class,
         ];
     }

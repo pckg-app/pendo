@@ -6,17 +6,17 @@ use Pckg\Pendo\Service\Fiscalization\Invoice;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
- * Class EchoPurh
+ * Class EchoFurs
  *
  * @package Pckg\Pendo\Console
  */
-class EchoPurh extends Command
+class InvoiceFurs extends Command
 {
 
     protected function configure()
     {
-        $this->setName('purh:echo')
-             ->setDescription('Check purh echo call')
+        $this->setName('furs:echo')
+             ->setDescription('Check furs echo call')
              ->addOptions([
                               'company' => 'Company id',
                           ], InputOption::VALUE_REQUIRED);
@@ -33,16 +33,16 @@ class EchoPurh extends Command
          * Create business.
          */
         $business = $company->createFiscalizationBusiness();
-        $fiscalizationService = $company->createFiscalizationService($business, $invoice);
+        $furs = $company->createFiscalizationService($business, $invoice);
 
         /**
-         * Create echo message and throw exception if something is not ok.
-         * Echo works.
+         * Create invoice message and throw exception if something is not ok.
+         * Invoice works.
          */
-        $fiscalizationService->createEchoMsg();
-        $fiscalizationService->postXml();
-        $response = $fiscalizationService->getXmlResponse();
-        echo strip_tags($response);
+        $furs->createInvoiceMsg();
+        $furs->postXml();
+        $furs->getXmlResponse();
+        echo $furs->getZoi();
     }
 
 }

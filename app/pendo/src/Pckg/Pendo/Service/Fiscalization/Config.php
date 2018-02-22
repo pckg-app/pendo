@@ -21,7 +21,8 @@ class Config
         $p12Cert,
         $password,
         $serverCert,
-        $softwareSupplierTaxNumber
+        $softwareSupplierTaxNumber,
+    $url = null
     ) {
         $this->taxNumber = substr($taxNumber, 2);
         $this->pemCert = $pemCert;
@@ -29,6 +30,7 @@ class Config
         $this->password = $password;
         $this->serverCert = $serverCert;
         $this->softwareSupplierTaxNumber = $softwareSupplierTaxNumber;
+        $this->url = $url;
     }
 
     public function getTaxNumber()
@@ -63,8 +65,7 @@ class Config
 
     public function getUrl()
     {
-        return 'https://cistest.apis-it.hr:8449/FiskalizacijaServiceTest';
-        return 'https://blagajne-test.fu.gov.si:9002/v1/cash_registers';
+        return $this->url;
     }
 
 }

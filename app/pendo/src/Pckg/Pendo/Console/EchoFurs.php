@@ -2,6 +2,7 @@
 
 use Pckg\Framework\Console\Command;
 use Pckg\Pendo\Entity\Companies;
+use Pckg\Pendo\Service\Fiscalization\Invoice;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
@@ -26,11 +27,13 @@ class EchoFurs extends Command
         $company = (new Companies())->where('id', $this->option('company'))
                                     ->oneOrFail();
 
+        $invoice = new Invoice(123, 22.44, 22.44, date('Y-m-d H:i:s', strtotime('-3 hours')));
+
         /**
          * Create business.
          */
         $business = $company->createFiscalizationBusiness();
-        $furs = $company->createFiscalizationService($business);
+        $furs = $company->createFiscalizationService($business, $invoice);
 
         /**
          * Create echo message and throw exception if something is not ok.
@@ -38,16 +41,7 @@ class EchoFurs extends Command
         $furs->createEchoMsg();
         $furs->postXml();
         $response = $furs->getXmlResponse();
-        echo $response;
-        die("ok echo");
-
-        /**
-         * Create business message and throw exception if something is not ok.
-         */
-        $furs->createBusinessMsg();
-        $furs->postXml();
-        $response = $furs->getXmlResponse();
-        echo $response;
+        echo strip_tags($response);
     }
 
 }

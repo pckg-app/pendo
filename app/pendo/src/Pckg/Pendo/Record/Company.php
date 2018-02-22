@@ -2,7 +2,6 @@
 
 use Defuse\Crypto\Crypto;
 use Defuse\Crypto\Key;
-use Exception;
 use Pckg\Database\Record;
 use Pckg\Pendo\Entity\Companies;
 use Pckg\Pendo\Service\Fiscalization\Business;
@@ -10,8 +9,17 @@ use Pckg\Pendo\Service\Fiscalization\Config;
 use Pckg\Pendo\Service\Fiscalization\Invoice;
 use Pckg\Pendo\Service\Fiscalization\Service\Furs;
 use Pckg\Pendo\Service\Fiscalization\Service\Purh;
-use Throwable;
 
+/**
+ * Class Company
+ *
+ * @package Pckg\Pendo\Record
+ *
+ * @property null|integer id
+ * @property string business
+ * @property string device
+ * @property string vat_number
+ */
 class Company extends Record
 {
 
@@ -33,7 +41,7 @@ class Company extends Record
         }
     }
 
-    public function getFisclizationConfig()
+    public function getFiscalizationConfig()
     {
         $key = $this->getDecodedPasswordAttribute();
 

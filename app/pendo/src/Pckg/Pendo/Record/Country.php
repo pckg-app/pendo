@@ -21,9 +21,11 @@ class Country extends Record
         $certsPath = path('app_private') . 'company/certificate' . path('ds');
 
         $code = 'sl';
-        $softwareSupplier = '1234567(';
+        $url = 'https://blagajne-test.fu.gov.si:9002/v1/cash_registers';
+        $softwareSupplier = '12345678';
         if ($this->phone == 385) {
             $code = 'hr';
+            $url = 'https://cistest.apis-it.hr:8449/FiskalizacijaServiceTest';
         }
 
         $key = $company->getDecodedPasswordAttribute();
@@ -34,7 +36,8 @@ class Country extends Record
             $certsPath . $company->p12,
             $key,
             $certsPath . $company->server,
-            $softwareSupplier
+            $softwareSupplier,
+            $url
         );
 
         if ($this->phone == 386) {
