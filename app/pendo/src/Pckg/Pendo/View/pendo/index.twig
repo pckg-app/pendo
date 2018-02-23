@@ -7,11 +7,12 @@
 
     <p><b>Fiscalize your bills in few simple steps</b></p>
     <ul>
-        <li>Signup to Pendo <a href="#">here</a> or login <a href="#">here</a></li>
-        <li>Get Pendo API key if you want to make integration of service in your app - <a href="#">here's</a> Pendo's
-            PHP API
+        <li>Signup to /pendo <a href="#">here</a> or login <a href="#">here</a></li>
+        <li>Get /pendo API key if you want to make integration of service in your app - <a
+                    href="https://github.com/pckg-app/pendo-api" target="_blank" title="/pendo PHP API">here's /pendo
+                PHP API</a>
         </li>
-        <li>Register your business by entering company details - via API call or in dashboard</li>
+        <li>Register your business by entering company details - via API call or in /pendo dashboard</li>
         <li>Start fiscalizing your orders in dashboard or via API call</li>
     </ul>
 
@@ -20,9 +21,15 @@
 
     <p><b>All features</b></p>
     <ul>
-        <li>Make creation, credit, storno and correction requests for your orders</li>
+        <li>Make create, credit, storno and correction requests for your orders</li>
         <li>Simple interface for transactions review</li>
         <li>Export transactions limited by date</li>
+    </ul>
+
+    <p><b>API endpoints</b></p>
+    <ul>
+        <li><span class="label label-info">POST</span> /api/invoice/create - create new invoice - send only datetime, invoice identifier, platform identifier, invoice price, payment price and taxes</li>
+        <li><span class="label label-info">GET</span> /api/fiscalizations - list transactions</li>
     </ul>
 
     <p><b>Currently supporting</b></p>
@@ -34,7 +41,7 @@
 
     <p><b>Trusted by</b></p>
     <ul>
-        <li><a href="https://startcomms.com" target="_blank">/maestro - startcomms.com</a></li>
+        <li><a href="https://startcomms.com" target="_blank">/comms - startcomms.com</a></li>
         <li><a href="https://mailo.foobar.si" target="_blank">/mailo - mailo.foobar.si</a></li>
     </ul>
 {% endblock %}
