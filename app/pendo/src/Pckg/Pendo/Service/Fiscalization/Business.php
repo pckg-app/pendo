@@ -24,7 +24,7 @@ class Business
         return $this->id;
     }
 
-    public function getTaxNumber($slice = false)
+    public function getTaxNumber($slice = true)
     {
         return $slice
             ? substr($this->taxNumber, 2)

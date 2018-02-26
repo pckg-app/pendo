@@ -18,6 +18,7 @@ class Purh extends AbstractService
 
     public function createEchoMsg()
     {
+        $this->type = 'echo';
         $this->xmlRequestType = 'EchoRequest';
         $this->uniqid = uniqid();
         $ns = 'tns';
@@ -41,6 +42,7 @@ class Purh extends AbstractService
 
     public function createBusinessMsg()
     {
+        $this->type = 'business';
         $this->xmlRequestType = 'PoslovniProstorZahtjev';
         $this->uniqid = uniqid();
         $ns = 'tns';
@@ -92,16 +94,19 @@ class Purh extends AbstractService
 
     public function createCorrectionMsg(Business $business, Invoice $oldInvoice, $correctionNumber = 1)
     {
+        $this->type = 'correction';
         // TODO: Implement createCorrectionMsg() method.
     }
 
     public function createCreditMsg(Business $oldBusiness, Invoice $oldInvoice)
     {
+        $this->type = 'credit';
         // TODO: Implement createCreditMsg() method.
     }
 
     public function createInvoiceMsg()
     {
+        $this->type = 'invoice';
         $this->xmlRequestType = 'RacunZahtjev';
 
         $UUID = $this->returnUUID();
@@ -156,11 +161,13 @@ class Purh extends AbstractService
 
     public function createTechnicalCorrectionMsg(Business $business, Invoice $oldInvoice, $correctionNumber = 1
     ) {
+        $this->type = 'technicalCorrection';
         // TODO: Implement createTechnicalCorrectionMsg() method.
     }
 
     public function createTechnicalStornoMsg(Business $business, Invoice $oldInvoice, $correctionNumber = 1)
     {
+        $this->type = 'technicalStorno';
         // TODO: Implement createTechnicalStornoMsg() method.
     }
 

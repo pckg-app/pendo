@@ -25,6 +25,7 @@ class Furs extends AbstractService
 
     public function createEchoMsg()
     {
+        $this->type = 'echo';
         $this->content2SignIdentifier = '';
 
         $this->urlPostHeader = [
@@ -60,6 +61,7 @@ class Furs extends AbstractService
 
     public function createBusinessMsg()
     {
+        $this->type = 'business';
         $this->msgIdentifier = 'data';
         $this->content2SignIdentifier = 'fu:BusinessPremiseRequest';
 
@@ -151,6 +153,7 @@ class Furs extends AbstractService
 
     public function createCreditMsg(Business $oldBusiness, Invoice $oldInvoice)
     {
+        $this->type = 'credit';
         $this->createMsg(
             [
                 'name'     => 'fu:ReferenceInvoice',
@@ -183,6 +186,7 @@ class Furs extends AbstractService
 
     public function createCorrectionMsg(Business $business, Invoice $oldInvoice, $correctionNumber = 1)
     {
+        $this->type = 'correction';
         $this->createMsg(
             [
                 [
@@ -222,6 +226,7 @@ class Furs extends AbstractService
 
     public function createTechnicalCorrectionMsg(Business $business, Invoice $oldInvoice, $correctionNumber = 1)
     {
+        $this->type = 'technicalCorrection';
         $this->createMsg(
             [
                 [
@@ -261,6 +266,7 @@ class Furs extends AbstractService
 
     public function createTechnicalStornoMsg(Business $business, Invoice $oldInvoice, $correctionNumber = 1)
     {
+        $this->type = 'technicalStorno';
         $this->createMsg(
             [
                 [
@@ -300,6 +306,7 @@ class Furs extends AbstractService
 
     public function createInvoiceMsg()
     {
+        $this->type = 'invoice';
         $this->createMsg();
     }
 
@@ -601,10 +608,13 @@ class Furs extends AbstractService
                 $doc = new DOMDocument('1.0', 'UTF-8');
                 $doc->loadXML($this->xmlResponse);
                 $this->saveResponse($doc, 'generated');
-                if (isset($this->invoice)) {
+                if ($this->type == 'invoice') {
                     $xpath = new DOMXPath($doc);
                     $nodeset = $xpath->query("//fu:UniqueInvoiceID")->item(0);
                     $this->eor = $nodeset->nodeValue ?? null;
+                    if (!$this->eor) {
+                        throw new \Exception(json_encode($this->xmlResponse));
+                    }
                 }
             } else {
                 var_dump(curl_error($conn));

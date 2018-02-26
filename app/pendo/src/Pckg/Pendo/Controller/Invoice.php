@@ -2,8 +2,6 @@
 
 use Exception;
 use Pckg\Pendo\Record\AppKey;
-use Pckg\Pendo\Record\Business;
-use Pckg\Pendo\Record\Company;
 use Pckg\Pendo\Service\Fiscalizator;
 
 /**
@@ -36,7 +34,7 @@ class Invoice
          * Validate posted date.
          */
         foreach ($keys as $key) {
-            if (!$invoiceData[$key]) {
+            if (!array_key_exists($key, $invoiceData)) {
                 throw new Exception($key . ' is required');
             }
         }
@@ -52,32 +50,22 @@ class Invoice
         /**
          * Get some data from apiKey.
          */
-        $invoiceData['vat_number'] = $appKey->app->company->vat_number;
-        $invoiceData['business'] = $appKey->app->company->business;
-        $invoiceData['device'] = $appKey->app->company->device;
-
-        /**
-         * Get business or throw exception.
-         */
-        $business = Business::getOrFail(['company_id' => $company->id, 'business_id' => $invoiceData['business']], null,
-            function() {
-                throw new Exception('Business is not registered');
-            });
+        $invoiceData['vat_number'] = substr($company->vat_number, 2);
+        $invoiceData['business'] = $company->business ?? 'PP2';
+        $invoiceData['device'] = $company->device ?? 1;
 
         /**
          * Create fiscalizator and fiscalize bill.
          */
-        $fiscalizator = new Fiscalizator($company->getFiscalizationConfig(),
-                                         $business->createFiscalizationBusiness($invoiceData['device']),
-                                         $invoiceData);
-        $invoice = $fiscalizator->fiscalize();
+        $fiscalizator = new Fiscalizator($company, $invoiceData);
+        $fiscalizator->fiscalize();
 
         /**
          * Return response.
          */
-        return response()->respondWithSuccess([
-                                                  'invoice' => $invoice,
-                                              ]);
+        return [
+            'invoice' => $fiscalizator->getFiscalizationRecord(),
+        ];
     }
 
 }

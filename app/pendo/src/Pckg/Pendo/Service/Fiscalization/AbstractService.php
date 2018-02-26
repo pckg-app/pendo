@@ -23,6 +23,8 @@ abstract class AbstractService
 
     protected $xmlsPath;
 
+    protected $type = null;
+
     /**
      * @var Config
      */

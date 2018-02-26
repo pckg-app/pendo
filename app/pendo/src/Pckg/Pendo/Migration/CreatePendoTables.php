@@ -53,6 +53,10 @@ class CreatePendoTables extends Migration
         $companies->varchar('pem');
         $companies->varchar('server');
 
+        $businesses = $this->table('businesses');
+        $businesses->integer('company_id')->references('companies');
+        $businesses->varchar('business_id', 16);
+
         $countries = $this->table('countries');
         $countries->boolean('default');
         $countries->varchar('phone');

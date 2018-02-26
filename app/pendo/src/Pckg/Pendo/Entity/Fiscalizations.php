@@ -68,10 +68,6 @@ class Fiscalizations extends Entity
 
     public function createNewForOrder($orderId, Business $business, $platformId = null)
     {
-        if (!$platformId) {
-            $platformId = config('app');
-        }
-
         $last = $this->getLastForBusiness($business);
 
         return new Fiscalization(
@@ -133,9 +129,6 @@ class Fiscalizations extends Entity
 
     public function getOrCreateFromOrder($orderId, Business $business, $platformId = null)
     {
-        if (!$platformId) {
-            $platformId = config('app');
-        }
         /**
          * Get last furs record
          */

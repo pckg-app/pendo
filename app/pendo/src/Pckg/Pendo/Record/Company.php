@@ -16,9 +16,9 @@ use Pckg\Pendo\Service\Fiscalization\Service\Purh;
  * @package Pckg\Pendo\Record
  *
  * @property null|integer id
- * @property string business
- * @property string device
- * @property string vat_number
+ * @property string       business
+ * @property string       device
+ * @property string       vat_number
  */
 class Company extends Record
 {
@@ -45,15 +45,21 @@ class Company extends Record
     {
         $key = $this->getDecodedPasswordAttribute();
 
-        $certsPath = path('app_private') . 'certs' . path('ds');
+        $certsPath = path('app_private') . 'company' . path('ds') . 'certificate' . path('ds');
+
+        $url = 'https://blagajne-test.fu.gov.si:9002/v1/cash_registers';
+        if (strtolower(substr($this->vat_number, 0, 2)) == 'hr') {
+            $url = 'https://cistest.apis-it.hr:8449/FiskalizacijaServiceTest';
+        }
 
         return new Config(
-            $this->vat_number,
+            substr($this->vat_number, 2), // remove country prefix
             $certsPath . $this->pem,
             $certsPath . $this->p12,
             $key,
             $certsPath . $this->server,
-            config('derive.fiscalization.softwareSupplierTaxNumber')
+            config('derive.fiscalization.softwareSupplierTaxNumber'),
+            $url
         );
     }
 
@@ -69,13 +75,13 @@ class Company extends Record
         return substr($pass, 0, 1) . '******' . substr($pass, strlen($pass) - 1);
     }
 
-    public function createFiscalizationBusiness()
+    public function createFiscalizationBusiness($business, $device)
     {
         return new Business(
-            $this->fiscalization_business ?? 'PP2',
-            substr($this->vat_number, 2), // remove SI, HR from starting of vat number
+            $business,
+            $this->vat_number,
             date('Y-m-d', strtotime($this->incorporated_at)),
-            $this->fiscalization_device ?? 1
+            $device
         );
     }
 
