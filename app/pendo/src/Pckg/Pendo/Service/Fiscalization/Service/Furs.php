@@ -696,6 +696,11 @@ class Furs extends AbstractService
 
         $qrCode = $qrCode . $controlChar;
         $file = $this->invoice->getInvoiceNumber() . '-' . date('Ymdhis') . '.png';
+
+        if (!is_dir($this->qrDirPath)) {
+            @mkdir($this->qrDirPath, 0755, true);
+        }
+
         QRcode::png(
             $qrCode,
             $this->qrDirPath . $file,
