@@ -91,7 +91,7 @@ class Furs extends AbstractService
             'children' => [
                 0 => [
                     'name'  => 'fu:TaxNumber',
-                    'value' => $this->config->getTaxNumber(),
+                    'value' => $this->business->getTaxNumber(),
                 ],
                 1 => [
                     'name'  => 'fu:BusinessPremiseID',
@@ -484,7 +484,7 @@ class Furs extends AbstractService
         $businessPremiseID = $this->business->getId();
         $electronicDeviceID = $this->business->getElectronicDeviceId();
         $newIssueDateTime = date("d.m.Y H:i:s", strtotime($this->invoice->getIssueDateTime()));
-        $signData = $this->config->getTaxNumber() . $newIssueDateTime . $this->invoice->getInvoiceNumber() .
+        $signData = $this->business->getTaxNumber() . $newIssueDateTime . $this->invoice->getInvoiceNumber() .
                     $businessPremiseID . $electronicDeviceID . $this->invoice->getInvoiceAmount();
 
         $key = openssl_pkey_get_private('file://' . $this->config->getPemCert(), $this->config->getPassword());
@@ -691,7 +691,7 @@ class Furs extends AbstractService
         $dateTimeNumber .= $tmpNum[1];
         $dateTimeNumber = str_replace(':', '', $dateTimeNumber);
 
-        $qrCode = $zoiDecimal . $this->config->getTaxNumber() . $dateTimeNumber;
+        $qrCode = $zoiDecimal . $this->business->getTaxNumber() . $dateTimeNumber;
         $controlChar = array_sum(str_split($qrCode)) % 10;
 
         $qrCode = $qrCode . $controlChar;
