@@ -74,7 +74,9 @@ class Company extends Record
     {
         $pass = $this->getDecodedPasswordAttribute();
 
-        return substr($pass, 0, 1) . '******' . substr($pass, strlen($pass) - 1);
+        return $pass
+            ? substr($pass, 0, 1) . '******' . substr($pass, strlen($pass) - 1)
+            : null;
     }
 
     public function createFiscalizationBusiness($business, $device)
