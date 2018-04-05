@@ -17,6 +17,16 @@
         <div class="row">
             <div class="col-xs-6">
                 <div class="form-group">
+                    <label>Company</label>
+                    <div>{{ appKey.app.company.short_name }} - {{ appKey.app.company.vat_number }}</div>
+                </div>
+
+                <div class="form-group">
+                    <label>Country</label>
+                    <div>{{ appKey.app.company.country.code }}</div>
+                </div>
+
+                <div class="form-group">
                     <label>Key</label>
                     <div>{{ appKey.key }}</div>
                 </div>
@@ -24,11 +34,6 @@
                 <div class="form-group">
                     <label>App</label>
                     <div>{{ appKey.app.title }}</div>
-                </div>
-
-                <div class="form-group">
-                    <label>Country</label>
-                    <div>{{ appKey.app.company.country.code }}</div>
                 </div>
 
                 <div class="form-group">
