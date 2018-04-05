@@ -331,4 +331,9 @@ class Purh extends AbstractService
         $this->xmlMessage = $XMLRequestDOMDoc;
     }
 
+    public function generateQR()
+    {
+        //@T00D00
+    }
+
 }
