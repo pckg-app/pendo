@@ -153,4 +153,15 @@ abstract class AbstractService
         $this->makeRequest();
     }
 
+    protected function saveResponse($doc, $type)
+    {
+        if (!is_dir($this->xmlsPath)) {
+            @mkdir($this->xmlsPath, 0755, true);
+        }
+
+        $doc->save(
+            $this->xmlsPath . date('Ymdhis') . '_' . (round(microtime(true) * 1000) % 1000) . '_' . $type . '.xml'
+        );
+    }
+
 }

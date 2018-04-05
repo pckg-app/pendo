@@ -195,6 +195,7 @@ class Purh extends AbstractService
             $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             $DOMResponse = new DOMDocument();
             $DOMResponse->loadXML($response);
+            $this->saveResponse($DOMResponse, 'response_purh');
             if ($code === 200) {
                 /* For RacunZahtjev */
                 $this->eor = $DOMResponse->getElementsByTagName('Jir')->item(0)->nodeValue ?? null;
@@ -326,6 +327,7 @@ class Purh extends AbstractService
         $X509IssuerSerialNode->appendChild($X509IssuerNameNode);
         $X509SerialNumberNode = new DOMElement('X509SerialNumber', $X509IssuerSerial);
         $X509IssuerSerialNode->appendChild($X509SerialNumberNode);
+        $this->saveResponse($XMLRequestDOMDoc, 'signed_purh');
         $this->xmlMessage = $XMLRequestDOMDoc;
     }
 

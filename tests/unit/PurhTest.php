@@ -94,7 +94,6 @@ class PurhTest extends \Codeception\Test\Unit
 
     public function testConfirm()
     {
-        return;
         $purh = $this->createPurh();
 
         $purh->createInvoiceMsg();

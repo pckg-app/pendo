@@ -572,7 +572,7 @@ class Furs extends AbstractService
         );
 
         $objXMLSecDSig->appendSignature($nodeset);
-        $this->saveResponse($doc, 'signed');
+        $this->saveResponse($doc, 'signed_furs');
 
         $this->xmlMessage = $doc->saveXML();
     }
@@ -596,10 +596,6 @@ class Furs extends AbstractService
                 CURLOPT_SSLCERTPASSWD     => $this->config->getPassword(),
                 CURLOPT_CAINFO            => $this->config->getServerCert(),
                 CURLOPT_VERBOSE           => false,
-                //dev() ? true : false,
-                //CURLOPT_SSLVERSION => 4
-                //CURLOPT_CAINFO => 'cert/furs_server.pem', //prevejanje server certifikata - uporabi: openssl x509 -inform der -in sitest-ca.cer -out furs_server.pem
-                //CURLOPT_SSLCERT => 'cert/furs_client.pem', //dodas svoj certifikat - uporabi: openssl pkcs12 -in ****.p12 -out furs_client.pem -password pass:*****
             ];
             //d("Request", $this->xmlMessage);
             curl_setopt_array($conn, $settings);
@@ -607,7 +603,7 @@ class Furs extends AbstractService
             if ($this->xmlResponse) {
                 $doc = new DOMDocument('1.0', 'UTF-8');
                 $doc->loadXML($this->xmlResponse);
-                $this->saveResponse($doc, 'generated');
+                $this->saveResponse($doc, 'response_furs');
                 if ($this->type == 'invoice') {
                     $xpath = new DOMXPath($doc);
                     $nodeset = $xpath->query("//fu:UniqueInvoiceID")->item(0);
@@ -630,24 +626,13 @@ class Furs extends AbstractService
         if ($this->xmlResponse) {
             $doc = new DOMDocument('1.0', 'UTF-8');
             $doc->loadXML($this->xmlResponse);
-            $this->saveResponse($doc, 'generated');
+            $this->saveResponse($doc, 'echo_furs');
 
             $xpath = new DOMXPath($doc);
             $nodeset = $xpath->query("//fu:EchoResponse")->item(0);
 
             return $nodeset->nodeValue ?? null;
         }
-    }
-
-    protected function saveResponse($doc, $type)
-    {
-        if (!is_dir($this->xmlsPath)) {
-            @mkdir($this->xmlsPath, 0755, true);
-        }
-
-        $doc->save(
-            $this->xmlsPath . date('Ymdhis') . '_' . substr(sha1($this->msgIdentifier), 0, 6) . '_' . $type . '.xml'
-        );
     }
 
     private function md52dec($hex)
