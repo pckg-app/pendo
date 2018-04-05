@@ -47,9 +47,13 @@ class Company extends Record
 
         $certsPath = path('app_private') . 'company' . path('ds') . 'certificate' . path('ds');
 
-        $url = 'https://blagajne-test.fu.gov.si:9002/v1/cash_registers';
+        $url = $this->type == 'prod'
+            ? 'https://blagajne-test.fu.gov.si:9002/v1/cash_registers'
+            : 'https://blagajne-test.fu.gov.si:9002/v1/cash_registers';
         if (strtolower(substr($this->vat_number, 0, 2)) == 'hr') {
-            $url = 'https://cistest.apis-it.hr:8449/FiskalizacijaServiceTest';
+            $url = $this->type == 'prod'
+                ? 'https://cis.porezna-uprava.hr:8449/FiskalizacijaService'
+                : 'https://cistest.apis-it.hr:8449/FiskalizacijaServiceTest';
         }
 
         return new Config(

@@ -27,6 +27,9 @@ class Invoice
             'total',
             'payment',
             'taxes',
+            'person',
+            'business',
+            'device',
         ];
         $invoiceData = only(post()->all(), $keys);
 
@@ -51,8 +54,6 @@ class Invoice
          * Get some data from apiKey.
          */
         $invoiceData['vat_number'] = substr($company->vat_number, 2);
-        $invoiceData['business'] = $company->business ?? 'PP2';
-        $invoiceData['device'] = $company->device ?? 1;
 
         /**
          * Create fiscalizator and fiscalize bill.
