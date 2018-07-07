@@ -600,6 +600,7 @@ class Furs extends AbstractService
             //d("Request", $this->xmlMessage);
             curl_setopt_array($conn, $settings);
             $this->xmlResponse = curl_exec($conn);
+            @file_put_contents($this->getDebugDir('raw'), $this->xmlResponse);
             if ($this->xmlResponse) {
                 $doc = new DOMDocument('1.0', 'UTF-8');
                 $doc->loadXML($this->xmlResponse);
