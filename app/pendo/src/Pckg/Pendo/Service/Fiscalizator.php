@@ -36,8 +36,6 @@ class Fiscalizator
         $this->fiscalizationBusiness = $company->createFiscalizationBusiness($invoiceData['business'],
                                                                              $invoiceData['device']);
         $this->invoiceData = $invoiceData;
-
-        dd($this->config, $this->fiscalizationBusiness, $this->invoiceData);
     }
 
     public function createInvoice()
