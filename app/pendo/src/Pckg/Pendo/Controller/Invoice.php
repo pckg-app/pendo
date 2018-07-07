@@ -32,6 +32,7 @@ class Invoice
             'device',
         ];
         $invoiceData = only(post()->all(), $keys);
+        dd($invoiceData);
 
         /**
          * Validate posted date.
