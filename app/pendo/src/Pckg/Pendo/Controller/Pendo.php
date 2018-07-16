@@ -70,7 +70,7 @@ class Pendo
 
     public function getFiscalizationsAction(AppKey $appKey)
     {
-        $fiscalizations = (new Fiscalizations())->where('business_tax_number', $appKey->app->company->vat_number)
+        $fiscalizations = (new Fiscalizations())->where('business_tax_number', substr($appKey->app->company->vat_number, 2))
                                                 ->limit(500)
                                                 ->orderBy('id DESC')
                                                 ->all();
