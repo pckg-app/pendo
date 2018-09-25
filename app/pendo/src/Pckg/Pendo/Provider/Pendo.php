@@ -22,7 +22,8 @@ class Pendo extends Provider
              */
             routeGroup([
                            'controller' => PendoController::class,
-                       ], [
+                       ],
+                       [
                            'homepage'       => route('/', 'index'),
                            'configureEmpty' => route('/configure', 'configure'),
                            'configure'      => route('/configure/[apiKey]', 'configure')->resolvers([
@@ -36,35 +37,42 @@ class Pendo extends Provider
                            'controller' => Company::class,
                            'urlPrefix'  => '/api/company',
                            'namePrefix' => 'api.company',
-                       ], [
+                       ],
+                       [
                            '.register' => route('/register', 'register'),
                        ]),
             routeGroup([
                            'controller' => Business::class,
                            'urlPrefix'  => '/api/business',
                            'namePrefix' => 'api.business',
-                       ], [
+                       ],
+                       [
                            '.register' => route('/register', 'register'),
                        ]),
             routeGroup([
                            'controller' => Invoice::class,
                            'urlPrefix'  => '/api/invoice',
                            'namePrefix' => 'api.invoice',
-                       ], [
-                           '.confirm' => route('/confirm', 'confirm'),
+                           'tags'       => ['auth:in'],
+                       ],
+                       [
+                           '.confirm' => route('/confirm', 'confirm')->resolvers([ApiKey::class]),
                        ]),
             routeGroup([
                            'controller' => PendoController::class,
                            'urlPrefix'  => '/api/fiscalizations',
                            'namePrefix' => 'api.fiscalizations',
-                       ], [
+                           'tags'       => ['auth:in'],
+                       ],
+                       [
                            '' => route('', 'fiscalizations')->resolvers([ApiKey::class]),
                        ]),
             routeGroup([
                            'controller' => PendoController::class,
                            'urlPrefix'  => '/check',
                            'namePrefix' => 'check',
-                       ], [
+                       ],
+                       [
                            '' => route('', 'check'),
                        ]),
         ];
