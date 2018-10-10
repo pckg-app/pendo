@@ -2,9 +2,11 @@
 
 use Pckg\Pendo\Entity\Fiscalizations;
 use Pckg\Pendo\Record\Company;
+use Pckg\Pendo\Service\Fiscalization\AbstractService;
 use Pckg\Pendo\Service\Fiscalization\Business;
 use Pckg\Pendo\Service\Fiscalization\Invoice;
 use Pckg\Pendo\Service\Fiscalization\Service\Furs;
+use Pckg\Pendo\Service\Fiscalization\Service\Pendo;
 use Pckg\Pendo\Service\Fiscalization\Service\Purh;
 
 class Fiscalizator
@@ -49,15 +51,18 @@ class Fiscalizator
     }
 
     /**
-     * @return Furs|Purh
+     * @return Furs|Purh|Pendo
      */
     public function createServiceFromBusiness()
     {
         $taxNumber = $this->fiscalizationBusiness->getTaxNumber(false);
 
         $code = strtolower(substr($taxNumber, 0, 2));
+        $handler = $this->invoiceData['handler'] ?? null;
 
-        if ($code == 'si') {
+        if ($handler) {
+            return new Pendo($this->config, $this->fiscalizationBusiness);
+        } elseif ($code == 'si') {
             return new Furs($this->config, $this->fiscalizationBusiness);
         } else {
             return new Purh($this->config, $this->fiscalizationBusiness);
@@ -79,7 +84,7 @@ class Fiscalizator
         /**
          * Create new fiscalization record for fiscalization business.
          */
-        $this->fiscalizationRecord = $this->createFiscalizationRecord();
+        $this->fiscalizationRecord = $this->createFiscalizationRecord($fiscalizationService);
 
         /**
          * Create fiscalization invoice.
@@ -147,11 +152,14 @@ class Fiscalizator
         return $this->fiscalizationBusiness;
     }
 
-    public function createFiscalizationRecord()
+    public function createFiscalizationRecord(AbstractService $fiscalizationService)
     {
         $fiscalizationRecord = (new Fiscalizations())->getOrCreateFromOrder($this->invoiceData['identifier'],
                                                                             $this->fiscalizationBusiness,
-                                                                            $this->invoiceData['platform']);
+                                                                            $this->invoiceData['platform'],
+                                                                            $this->invoiceData['mode'] ?? 'prod',
+                                                                            $fiscalizationService
+        );
         $fiscalizationRecord->invoice = $this->invoiceData['total'];
         $fiscalizationRecord->payment = $this->invoiceData['payment'];
 

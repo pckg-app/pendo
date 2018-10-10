@@ -25,6 +25,8 @@ class CreatePendoTables extends Migration
         $fiscalizations->varchar('business_id');
         $fiscalizations->varchar('electronic_device_id');
         $fiscalizations->varchar('business_tax_number');
+        $fiscalizations->varchar('mode', 128);
+        $fiscalizations->varchar('handler', 128);
         $fiscalizations->varchar('type');
         $fiscalizations->decimal('invoice');
         $fiscalizations->decimal('payment');

@@ -30,6 +30,7 @@ class Invoice
             'person',
             'business',
             'device',
+            'mode',
         ];
         $invoiceData = only(post()->all(), $keys);
 

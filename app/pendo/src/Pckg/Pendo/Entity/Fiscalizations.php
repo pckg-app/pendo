@@ -3,6 +3,7 @@
 use Pckg\Database\Collection;
 use Pckg\Database\Entity;
 use Pckg\Pendo\Record\Fiscalization;
+use Pckg\Pendo\Service\Fiscalization\AbstractService;
 use Pckg\Pendo\Service\Fiscalization\Business;
 
 class Fiscalizations extends Entity
@@ -43,13 +44,15 @@ class Fiscalizations extends Entity
             ->all();
     }
 
-    public function getLastForBusiness(Business $business)
+    public function getLastForBusiness(Business $business, $mode = 'prod', AbstractService $fiscalizationService)
     {
         return (new static())
             ->where('business_id', $business->getId())
             ->where('business_tax_number', $business->getTaxNumber())
             ->where('electronic_device_id', $business->getElectronicDeviceId())
             ->where('requested_at', date('Y') . '-01-01 00:00:00', '>=')
+            ->where('mode', $mode)
+            ->where('handler', get_class($fiscalizationService))
             ->orderBy('furs_id DESC')
             ->one();
     }
@@ -66,9 +69,9 @@ class Fiscalizations extends Entity
             ->one();
     }
 
-    public function createNewForOrder($orderId, Business $business, $platformId = null)
+    public function createNewForOrder($orderId, Business $business, $platformId = null, $mode = 'prod', AbstractService $fiscalizationService)
     {
-        $last = $this->getLastForBusiness($business);
+        $last = $this->getLastForBusiness($business, $mode, $fiscalizationService);
 
         return new Fiscalization(
             [
@@ -78,6 +81,8 @@ class Fiscalizations extends Entity
                 'business_tax_number'  => $business->getTaxNumber(),
                 'electronic_device_id' => $business->getElectronicDeviceId(),
                 'platform_id'          => $platformId,
+                'mode'                 => $mode,
+                'handler'              => get_class($fiscalizationService),
             ]
         );
     }
@@ -127,7 +132,7 @@ class Fiscalizations extends Entity
         );
     }
 
-    public function getOrCreateFromOrder($orderId, Business $business, $platformId = null)
+    public function getOrCreateFromOrder($orderId, Business $business, $platformId = null, $mode = 'prod', AbstractService $fiscalizationService)
     {
         /**
          * Get last furs record
@@ -138,11 +143,13 @@ class Fiscalizations extends Entity
             ->where('business_tax_number', $business->getTaxNumber())
             ->where('electronic_device_id', $business->getElectronicDeviceId())
             ->where('platform_id', $platformId)
+            ->where('mode', $mode)
+            ->where('handler', get_class($fiscalizationService))
             ->orderBy('id DESC')
             ->one();
 
         if (!$furs) {
-            $furs = $this->createNewForOrder($orderId, $business, $platformId);
+            $furs = $this->createNewForOrder($orderId, $business, $platformId, $mode, $fiscalizationService);
         }
 
         $furs->requested_at = date('Y-m-d H:i:s');
