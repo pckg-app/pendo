@@ -30,7 +30,6 @@ class Pendo extends Provider
     public function middlewares()
     {
         return [
-            LoginWithApiKeyHeader::class,
             RegisterApiKeyHeader::class,
             RegisterCoreAssets::class,
         ];
