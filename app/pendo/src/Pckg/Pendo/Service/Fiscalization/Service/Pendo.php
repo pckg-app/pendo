@@ -7,6 +7,16 @@ use Pckg\Pendo\Service\Fiscalization\Invoice;
 class Pendo extends AbstractService
 {
 
+    public function getEOR()
+    {
+        return 'PEOR-' . $this->invoice->getInvoiceNumber();
+    }
+
+    public function getZOI()
+    {
+        return 'PZOI-' . $this->invoice->getInvoiceNumber();
+    }
+
     public function createEchoMsg()
     {
         // TODO: Implement createEchoMsg() method.
