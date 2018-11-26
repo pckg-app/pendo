@@ -32,7 +32,7 @@ class EchoPurh extends Command
         /**
          * Create business.
          */
-        $business = $company->createFiscalizationBusiness();
+        $business = $company->createFiscalizationBusiness('PPTEST', '3');
         $fiscalizationService = $company->createFiscalizationService($business, $invoice);
 
         /**
