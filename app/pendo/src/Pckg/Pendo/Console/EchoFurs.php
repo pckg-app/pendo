@@ -32,7 +32,7 @@ class EchoFurs extends Command
         /**
          * Create business.
          */
-        $business = $company->createFiscalizationBusiness();
+        $business = $company->createFiscalizationBusiness('PPTEST', '3');
         $furs = $company->createFiscalizationService($business, $invoice);
 
         /**
