@@ -55,18 +55,17 @@ class Fiscalizator
      */
     public function createServiceFromBusiness()
     {
-        $taxNumber = $this->fiscalizationBusiness->getTaxNumber(false);
-
-        $code = strtolower(substr($taxNumber, 0, 2));
         $handler = $this->invoiceData['handler'] ?? null;
 
-        if ($handler) {
+        if ($handler == 'pendo') {
             return new Pendo($this->config, $this->fiscalizationBusiness);
-        } elseif ($code == 'si') {
+        } elseif ($handler == 'furs') {
             return new Furs($this->config, $this->fiscalizationBusiness);
-        } else {
+        } elseif ($handler == 'purh') {
             return new Purh($this->config, $this->fiscalizationBusiness);
         }
+
+        throw new \Exception('Handler is required');
     }
 
     public function fiscalize()
