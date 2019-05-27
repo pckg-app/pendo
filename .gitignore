@@ -24,6 +24,7 @@ logs/**
 # ENV
 app/*/config/env.php
 config/env.php
+.env
 
 # DEV -.-
 sublime

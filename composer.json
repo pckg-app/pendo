@@ -23,6 +23,8 @@
     "pckg/import": "dev-master",
     "pckg/payment": "dev-master",
     "pckg/tempus": "dev-master",
+    "pckg-app/api": "dev-master",
+    "pckg/manager": "dev-master",
     "jonnyw/php-phantomjs": "4.*",
     "nesbot/carbon": "1.*",
     "twbs/bootstrap": "3.*",
@@ -42,7 +44,7 @@
     "symfony/dependency-injection": "3.3.*",
     "facebook/facebook-instant-articles-sdk-php": "dev-master",
     "guzzlehttp/guzzle": "6.*",
-    "pckg-app/api": "dev-master"
+    "snapappointments/bootstrap-select": "dev-master"
   },
   "require-dev": {
     "codeception/codeception": "dev-master"

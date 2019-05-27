@@ -1,8 +1,6 @@
 repository: git@github.com:pckg-app/pendo.git
 branch: master
 services:
-  web:
-    https: true
   storage:
     dir:
       - storage

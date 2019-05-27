@@ -3,6 +3,7 @@
 use Pckg\Framework\Console\Command;
 use Pckg\Pendo\Entity\Companies;
 use Pckg\Pendo\Service\Fiscalization\Invoice;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
@@ -19,15 +20,22 @@ class InvoiceFurs extends Command
              ->setDescription('Check furs echo call')
              ->addOptions([
                               'company' => 'Company id',
-                          ], InputOption::VALUE_REQUIRED);
+                          ], InputOption::VALUE_REQUIRED)
+             ->addArguments([
+                                'price' => 'Fiscalization price',
+                                'num'   => 'Invoice number',
+                                'date'  => 'Invoice date',
+                            ], InputArgument::REQUIRED);
     }
 
     public function handle()
     {
-        $company = (new Companies())->where('id', $this->option('company'))
-                                    ->oneOrFail();
+        $company = (new Companies())->where('id', $this->option('company'))->oneOrFail();
+        $price = $this->argument('price');
+        $num = $this->argument('num');
+        $date = $this->argument('date');
 
-        $invoice = new Invoice(123, 22.44, 22.44, date('Y-m-d H:i:s', strtotime('-3 hours')));
+        $invoice = new Invoice($num, $price, $price, $date);
 
         /**
          * Create business.
