@@ -106,7 +106,17 @@ class Fiscalizator
         ];
         foreach ($data as $key => $method) {
             if ($value = $fiscalizationService->{$method}()) {
-                $this->fiscalizationRecord->{$key} = $value;
+                try {
+                    $this->fiscalizationRecord->{$key} = $value;
+                } catch (\Throwable $e) {
+                    $env = env();
+                    if (method_exists($env, 'reportToRollbar')) {
+                        $env->reportToRollbar($e);
+                        continue;
+                    }
+
+                    throw $e;
+                }
             }
         }
 
