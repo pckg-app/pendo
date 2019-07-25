@@ -27,19 +27,27 @@ class InvoicePurh extends Command
         $company = (new Companies())->where('id', $this->option('company'))
                                     ->oneOrFail();
 
-        $invoice = new Invoice(123, 22.44, 22.44, date('Y-m-d H:i:s', strtotime('-3 hours')));
+        $invoice = new Invoice(123, 22.44, 22.44, date('Y-m-d H:i:s'));
 
         /**
          * Create business.
          */
-        $business = $company->createFiscalizationBusiness();
+        $business = $company->createFiscalizationBusiness('PPTEST', '1');
         $fiscalizationService = $company->createFiscalizationService($business, $invoice);
 
         /**
          * Create invoice message and throw exception if something is not ok.
          * Invoice works.
          */
-        $fiscalizationService->createInvoiceMsg();
+        $fiscalizationService->createInvoiceMsg([
+            'price' => 22.44,
+            'taxes' => [
+                25 => [
+                    'base' => 20.0,
+                    'vat' => 5.0,
+                ]
+            ],
+                                                ]);
         $fiscalizationService->postXml();
         $fiscalizationService->getXmlResponse();
         echo $fiscalizationService->getZoi();

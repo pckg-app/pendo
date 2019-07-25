@@ -93,7 +93,7 @@ class Fiscalizator
         /**
          * Create invoice request.
          */
-        $fiscalizationService->createInvoiceMsg();
+        $fiscalizationService->createInvoiceMsg($this->invoiceData);
         $fiscalizationService->postXml();
 
         /**

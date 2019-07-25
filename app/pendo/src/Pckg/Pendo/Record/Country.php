@@ -20,12 +20,15 @@ class Country extends Record
          */
         $certsPath = path('app_private') . 'company/certificate' . path('ds');
 
-        $code = 'sl';
-        $url = 'https://blagajne-test.fu.gov.si:9002/v1/cash_registers';
         $softwareSupplier = '12345678';
-        if ($this->phone == 385) {
-            $code = 'hr';
-            $url = 'https://cistest.apis-it.hr:8449/FiskalizacijaServiceTest';
+
+        $url = $company->type == 'prod'
+            ? 'https://blagajne.fu.gov.si:9003/v1/cash_registers'
+            : 'https://blagajne-test.fu.gov.si:9002/v1/cash_registers';
+        if (strtolower(substr($company->vat_number, 0, 2)) == 'hr') {
+            $url = $company->type == 'prod'
+                ? 'https://cis.porezna-uprava.hr:8449/FiskalizacijaService'
+                : 'https://cistest.apis-it.hr:8449/FiskalizacijaServiceTest';
         }
 
         $key = $company->getDecodedPasswordAttribute();

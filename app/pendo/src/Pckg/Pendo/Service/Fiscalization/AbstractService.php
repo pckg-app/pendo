@@ -110,7 +110,7 @@ abstract class AbstractService
 
     public abstract function createCreditMsg(Business $oldBusiness, Invoice $oldInvoice);
 
-    public abstract function createInvoiceMsg();
+    public abstract function createInvoiceMsg(array $invoiceData = []);
 
     public abstract function createTechnicalCorrectionMsg(Business $business, Invoice $oldInvoice, $correctionNumber = 1
     );

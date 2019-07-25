@@ -104,7 +104,7 @@ class Purh extends AbstractService
         // TODO: Implement createCreditMsg() method.
     }
 
-    public function createInvoiceMsg()
+    public function createInvoiceMsg(array $invoiceData = [])
     {
         $this->type = 'invoice';
         $this->xmlRequestType = 'RacunZahtjev';
@@ -136,16 +136,15 @@ class Purh extends AbstractService
         $writer->writeElementNs($ns, 'OznNapUr', null, $this->business->getElectronicDeviceId());
         $writer->endElement(); // #BrRac
         $writer->startElementNs($ns, 'Pdv', null);
-        $writer->startElementNs($ns, 'Porez', null);
-        $writer->writeElementNs($ns, 'Stopa', null, '25.00');
-        $writer->writeElementNs($ns, 'Osnovica', null, '100.00');
-        $writer->writeElementNs($ns, 'Iznos', null, '25.00');
-        $writer->endElement(); // #Porez
-        $writer->startElementNs($ns, 'Porez', null);
-        $writer->writeElementNs($ns, 'Stopa', null, '5.00');
-        $writer->writeElementNs($ns, 'Osnovica', null, '50.00');
-        $writer->writeElementNs($ns, 'Iznos', null, '7.50');
-        $writer->endElement(); // #Porez
+
+        foreach ($invoiceData['taxes'] ?? [] as $tax => $taxData) {
+            $writer->startElementNs($ns, 'Porez', null);
+            $writer->writeElementNs($ns, 'Stopa', null, number_format($tax, 2)); // 25.00
+            $writer->writeElementNs($ns, 'Osnovica', null, number_format($taxData['base'], 2)); // 200.00
+            $writer->writeElementNs($ns, 'Iznos', null, number_format($taxData['vat'], 2)); // 50.00
+            $writer->endElement(); // #Porez
+        }
+
         $writer->endElement(); // #Pdv
         $writer->writeElementNs($ns, 'IznosUkupno', null, $this->invoice->getInvoiceAmount());
         $writer->writeElementNs($ns, 'NacinPlac', null, 'G'); // O || G
@@ -173,7 +172,7 @@ class Purh extends AbstractService
 
     public function makeRequest()
     {
-        // d('message', $this->xmlMessage);
+        // d('message', $this->xmlMessage, $this->config->getUrl());
 
         $ch = curl_init();
         $options = [
@@ -186,11 +185,12 @@ class Purh extends AbstractService
             CURLOPT_SSL_VERIFYHOST    => 2,
             CURLOPT_SSL_VERIFYPEER    => true,
             CURLOPT_CAINFO            => $this->config->getServerCert(),
+            CURLOPT_SSLCERT           => $this->config->getPemCert(),
+            CURLOPT_SSLCERTPASSWD     => $this->config->getPassword(),
             CURLOPT_VERBOSE           => false,
         ];
         curl_setopt_array($ch, $options);
         $this->xmlResponse = $response = curl_exec($ch);
-        //d("response", $response);
         if ($response) {
             $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             $DOMResponse = new DOMDocument();
@@ -209,6 +209,7 @@ class Purh extends AbstractService
                 }
             }
         } else {
+            // ddd($this->config->getServerCert(), curl_error($ch));
             throw new Exception("CURL error: " . curl_error($ch));
         }
         curl_close($ch);

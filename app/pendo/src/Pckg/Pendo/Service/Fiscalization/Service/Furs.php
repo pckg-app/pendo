@@ -304,7 +304,7 @@ class Furs extends AbstractService
         );
     }
 
-    public function createInvoiceMsg()
+    public function createInvoiceMsg(array $invoiceData = [])
     {
         $this->type = 'invoice';
         $this->createMsg();

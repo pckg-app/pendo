@@ -37,7 +37,7 @@ class Pendo extends AbstractService
         // TODO: Implement createCreditMsg() method.
     }
 
-    public function createInvoiceMsg()
+    public function createInvoiceMsg(array $invoiceData = [])
     {
         // TODO: Implement createInvoiceMsg() method.
     }
