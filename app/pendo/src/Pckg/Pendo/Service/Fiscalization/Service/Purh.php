@@ -140,8 +140,8 @@ class Purh extends AbstractService
         foreach ($invoiceData['taxes'] ?? [] as $tax => $taxData) {
             $writer->startElementNs($ns, 'Porez', null);
             $writer->writeElementNs($ns, 'Stopa', null, number_format($tax, 2)); // 25.00
-            $writer->writeElementNs($ns, 'Osnovica', null, number_format($taxData['base'], 2)); // 200.00
-            $writer->writeElementNs($ns, 'Iznos', null, number_format($taxData['vat'], 2)); // 50.00
+            $writer->writeElementNs($ns, 'Osnovica', null, number_format($taxData['base'], 2), '.', ''); // 200.00
+            $writer->writeElementNs($ns, 'Iznos', null, number_format($taxData['vat'], 2), '.', ''); // 50.00
             $writer->endElement(); // #Porez
         }
 
