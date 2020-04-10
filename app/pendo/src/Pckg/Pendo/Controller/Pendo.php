@@ -10,6 +10,7 @@ use Pckg\Pendo\Console\InvoicePurh;
 use Pckg\Pendo\Entity\Fiscalizations;
 use Pckg\Pendo\Form\Configure;
 use Pckg\Pendo\Record\AppKey;
+use Pckg\Pendo\Service\Certificate;
 
 /**
  * Class Pendo
@@ -29,7 +30,54 @@ class Pendo
 
     public function getConfigureAction(AppKey $appKey, Configure $configureForm)
     {
-        return view('Pckg/Pendo:pendo/configure', ['appKey' => $appKey, 'configureForm' => $configureForm]);
+        return '<pendo-configure-comms api-key="' . $appKey->key . '"></pendo-configure-comms>';
+        //return view('Pckg/Pendo:pendo/configure', ['appKey' => $appKey, 'configureForm' => $configureForm]);
+    }
+
+    public function postUploadCertificateAction(AppKey $appKey)
+    {
+        $upload = new Upload('file', ['application/x-pkcs12', 'application/octet-stream']);
+
+        if (($message = $upload->validateUpload()) !== true) {
+            return [
+                'success' => false,
+                'message' => $message,
+            ];
+        }
+
+        $file = $upload->getFile()['name'];
+        if (strpos($file, '.p12') !== (strlen($file) - 4)) {
+            return [
+                'success' => false,
+                'message' => 'Upload .p12 file',
+            ];
+        }
+
+        /**
+         * We do not have a password, so we cannot validate it yet.
+         */
+
+        /**
+         * Save certificate?
+         */
+        $uniqueName = uuid4();
+        $final = $upload->save(path('private') . '/company/certificate/', $uniqueName);
+
+        return [
+            'success' => true,
+            'url' => $final,
+        ];
+    }
+
+    public function postValidateCertificateAction()
+    {
+        $validator = new Certificate();
+        $status = $validator->getInfo($props, path('private') . '/company/certificate/', post('hash'), post('password'));
+        return [
+            'data' => $props,
+            'status' => $status,
+            'success' => $status === Certificate::CODE_SUCCESS
+        ];
     }
 
     public function postConfigureAction(AppKey $appKey, Configure $configure)
@@ -44,7 +92,7 @@ class Pendo
         $data = post('password')
             ? [
                 'password' => Crypto::encrypt(post('password'), $key),
-                'hash'     => $asciiKey,
+                'hash' => $asciiKey,
             ]
             : [];
         $uploads = [];
@@ -71,9 +119,9 @@ class Pendo
     public function getFiscalizationsAction(AppKey $appKey)
     {
         $fiscalizations = (new Fiscalizations())->where('business_tax_number', substr($appKey->app->company->vat_number, 2))
-                                                ->limit(500)
-                                                ->orderBy('id DESC')
-                                                ->all();
+            ->limit(500)
+            ->orderBy('id DESC')
+            ->all();
 
         return ['fiscalizations' => $fiscalizations];
     }

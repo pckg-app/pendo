@@ -1,6 +1,7 @@
 <?php namespace Pckg\Pendo\Provider;
 
 use Pckg\Framework\Provider;
+use Pckg\Pendo\Console\DebugCert;
 use Pckg\Pendo\Console\EchoFurs;
 use Pckg\Pendo\Console\EchoPurh;
 use Pckg\Pendo\Console\InvoicePurh;
@@ -27,8 +28,14 @@ class Pendo extends Provider
                            'homepage'       => route('/', 'index'),
                            'configureEmpty' => route('/configure', 'configure'),
                            'configure'      => route('/configure/[apiKey]', 'configure')->resolvers([
-                                                                                                        'apiKey' => ApiKeyParameter::class,
-                                                                                                    ]),
+                               'apiKey' => ApiKeyParameter::class,
+                           ]),
+                           'certificate'      => route('/configure/[apiKey]/certificate', 'uploadCertificate')->resolvers([
+                               'apiKey' => ApiKeyParameter::class,
+                           ]),
+                           'validateCertificate'      => route('/configure/[apiKey]/validate-certificate', 'validateCertificate')->resolvers([
+                               'apiKey' => ApiKeyParameter::class,
+                           ]),
                        ]),
             /**
              * API routes.
@@ -84,6 +91,7 @@ class Pendo extends Provider
             EchoPurh::class,
             InvoicePurh::class,
             EchoFurs::class,
+            DebugCert::class,
         ];
     }
 

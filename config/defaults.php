@@ -12,6 +12,15 @@ return [
         'hash'   => '',
         'dbhash' => '',
     ],
+    'database' => [
+        'default' => [
+            'driver' => 'mysql',
+            'host'   => dotenv('DB_HOST', 'database'),
+            'db'     => dotenv('DB_NAME', 'pendo_pendo'),
+            'user'   => dotenv('DB_USER', 'pendo_pendo'),
+            'pass'   => dotenv('DB_PASS'),
+        ]
+    ],
     'twig'     => [
         'cache'   => # requires composer doctrine/cache
             [
@@ -38,7 +47,7 @@ return [
     ],
     'pckg'     => [
         'framework' => [
-            'dev' => ['127.0.0.1'],
+            'dev' => ['127.0.0.1', '172.18.0....', '172.19.0....', '10.255.0....', '10.0.0....'],
         ],
         'locale'    => [
             'default'  => 'en_GB',
@@ -77,4 +86,5 @@ return [
         ],
     ],
     'lessc'      => ' --js',
+    'disabledless' => true,
 ];

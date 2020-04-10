@@ -17,12 +17,10 @@
     "pckg/translator": "dev-master",
     "pckg/auth": "dev-master",
     "pckg/generic": "dev-master",
-    "pckg/charts": "dev-master",
     "pckg/helpers-js": "dev-master",
     "pckg/helpers-less": "dev-master",
     "pckg/import": "dev-master",
     "pckg/payment": "dev-master",
-    "pckg/tempus": "dev-master",
     "pckg-app/api": "dev-master",
     "pckg/manager": "dev-master",
     "jonnyw/php-phantomjs": "4.*",
@@ -30,29 +28,19 @@
     "twbs/bootstrap": "3.*",
     "components/jquery": "2.*",
     "fortawesome/font-awesome": "4.*",
-    "bootstrap-select/bootstrap-select": "1.*",
-    "kraksoft/colorbox": "1.*",
-    "dimsemenov/magnific-popup": "dev-master",
     "robrichards/xmlseclibs": "dev-master",
-    "aferrandini/phpqrcode": "^1.0",
     "intervention/image": "^2.3",
     "league/csv": "^8.1",
-    "icepay/api": "^0.0.1",
     "doctrine/cache": "^1.6",
     "defuse/php-encryption": "^2.0",
-    "pelago/emogrifier": "^1.2",
     "symfony/dependency-injection": "3.3.*",
-    "facebook/facebook-instant-articles-sdk-php": "dev-master",
     "guzzlehttp/guzzle": "6.*",
-    "snapappointments/bootstrap-select": "dev-master"
+    "maximebf/debugbar": "dev-master",
+    "ext-openssl": "*",
+    "ramsey/uuid": "^4.0@dev"
   },
   "require-dev": {
     "codeception/codeception": "dev-master"
   },
-  "minimum-stability": "dev",
-  "scripts": {
-    "post-install-cmd": [
-      "php console project:lock --checkout"
-    ]
-  }
+  "minimum-stability": "dev"
 }

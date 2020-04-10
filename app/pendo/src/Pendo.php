@@ -7,7 +7,6 @@ use Pckg\Framework\Provider;
 use Pckg\Framework\Provider\Framework;
 use Pckg\Generic\Middleware\EncapsulateResponse;
 use Pckg\Generic\Provider\GenericPaths;
-use Pckg\Manager\Middleware\RegisterCoreAssets;
 use Pckg\Manager\Provider\Manager;
 use Pckg\Pendo\Provider\Pendo as PendoProvider;
 use Pckg\Pendo\Provider\PendoApi;
@@ -19,6 +18,7 @@ class Pendo extends Provider
     {
         return [
             PendoProvider::class,
+            Provider\Frontend::class,
             PendoApi::class,
             Auth::class,
             Framework::class,
@@ -31,7 +31,6 @@ class Pendo extends Provider
     {
         return [
             RegisterApiKeyHeader::class,
-            RegisterCoreAssets::class,
         ];
     }
 
@@ -39,6 +38,20 @@ class Pendo extends Provider
     {
         return [
             EncapsulateResponse::class,
+        ];
+    }
+
+    public function assets() {
+        return [
+            'libraries' => [
+                '/build/js/libraries.js',
+                //'/build/js/app.css',
+                '/node_modules/bootstrap/dist/css/bootstrap.min.css',
+                'less/app.css',
+            ],
+            'footer' => [
+                '/build/js/app.js'
+            ],
         ];
     }
 

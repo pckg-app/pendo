@@ -1,0 +1,58 @@
+version: '3'
+
+services:
+
+  web:
+    image: schtr4jh/pckg:apache-alpine
+    ports:
+      - "443:443"
+      - "80:80"
+    links:
+      - database
+      - queue-server
+      - cache-server
+    depends_on:
+      - queue-server
+      - cache-server
+      - database
+    volumes:
+      - ./:/var/www/html/
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+  database:
+    image: mysql:5
+    volumes:
+      - dbstorage:/var/lib/mysql
+    env_file: ./.env.database.docker
+#    expose:
+#      - 3306
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+  cache-server:
+    image: redis:5-alpine
+    env_file: ./.env.redis.docker
+    command: ["sh", "-c", "redis-server --requirepass $${REDIS_PASS}"]
+#    ports:
+#      - '6379:6379'
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+  queue-server:
+    image: rabbitmq:3-alpine
+#    ports:
+#      - "6572:5672"
+#      - "15672:15672"
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+networks:
+  default: {}
+
+volumes:
+  dbstorage: {}
