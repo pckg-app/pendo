@@ -75,7 +75,7 @@ class Certificate
         }
 
         $props = [
-            'vat' => $data['subject']['OU'][1] ?? null,
+            'vatNumber' => $data['subject']['OU'][1] ?? null,
             'companyCountry' => $data['subject']['C'] ?? null,
             'company' => $data['subject']['CN'] ?? null,
             'issuerCountry' => $data['issuer']['C'] ?? null,
@@ -84,6 +84,32 @@ class Certificate
         ];
 
         return static::CODE_SUCCESS;
+    }
+
+    public function makePemFromP12($filename, $password)
+    {
+        $pem = str_replace('.p12', '.pem', $filename);
+        if (file_exists($pem)) {
+            return 'File exists';
+        }
+        $results = [];
+        $worked = openssl_pkcs12_read(file_get_contents($filename), $results, $password);
+
+        if (!$worked) {
+            return openssl_error_string() ?? 'OPENSSL error';
+        } elseif (!($results['pkey'] ?? null)) {
+            return 'NOKEY';
+        }
+
+        $result = null;
+        $worked = openssl_pkey_export($results['pkey'], $result, $password);
+        if (!$worked) {
+            return openssl_error_string() ?? 'OPENSSL error2';
+        }
+
+        file_put_contents($pem, $result);
+
+        return true;
     }
 
 }

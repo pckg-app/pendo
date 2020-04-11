@@ -71,10 +71,42 @@ class Pendo
         ];
     }
 
-    public function postValidateCertificateAction()
+    public function postValidateCertificateAction(AppKey $appKey)
     {
         $validator = new Certificate();
-        $status = $validator->getInfo($props, path('private') . '/company/certificate/', post('hash'), post('password'));
+        $path = path('private') . '/company/certificate/';
+        $hash = post('hash');
+        $password = post('password');
+
+        $status = $validator->getInfo($props, $path, $hash, $password);
+
+        /**
+         * Update company to the new certificate.
+         */
+        if ($status === Certificate::CODE_SUCCESS) {
+            if ($appKey->app->company->vat_number === $props['vatNumber']) {
+                /**
+                 * Assign certificate.
+                 * + Make pem?
+                 * + Define server?
+                 * + Define type?
+                 */
+                $message = $validator->makePemFromP12($path . $hash, $password);
+                if ($message === true) {
+                    $appKey->app->company->setAndSave([
+                        'p12' => $hash,
+                        'pem' => str_replace('.p12', '.pem', $hash),
+                        'server' => $appKey->app->company->country->code === 'SI' ? 'SIGOV-CA-2018.pem' : 'finaprodmerged.pem',
+                        'mode' => 'prod',
+                    ]);
+                } else {
+                    $status = 'ERROR_PEM';
+                }
+            } else {
+                $status = 'ERROR_COMPANY';
+            }
+        }
+
         return [
             'data' => $props,
             'status' => $status,

@@ -26,7 +26,7 @@ class Company
         /**
          * Create new company.
          */
-        $company = CompanyRecord::getOrCreate(only($companyData, ['vat_number']), null, array_merge(['mode' => 'prod'], $companyData));
+        $company = CompanyRecord::getOrCreate(only($companyData, ['vat_number']), null, $companyData);
 
         /**
          * Return company.
