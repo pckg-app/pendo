@@ -123,7 +123,7 @@ module.exports = {
         path: __dirname + '/build/js',
         chunkFilename: 'chunk.[name].[hash].js',
         publicPath: '/build/js/'
-    },
+    }/*,
     optimization: {
         minimize: process.env.NODE_ENV !== 'development',
         minimizer: [
@@ -134,5 +134,5 @@ module.exports = {
                 sourceMap: process.env.NODE_ENV === 'development'
             })
         ],
-    }
+    }*/
 };

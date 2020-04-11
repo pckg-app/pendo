@@ -74,7 +74,7 @@ class Pendo extends Provider
             ],
                 [
                     '.register' => route('/register', 'register'),
-                    '.key' => route('/key', 'appKey'),
+                    '.key' => route('/[key]', 'appKey')->resolvers(['key' => ApiKeyParameter::class]),
                 ]),
             routeGroup([
                 'controller' => User::class,
