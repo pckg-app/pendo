@@ -19,8 +19,6 @@
     "pckg/generic": "dev-master",
     "pckg/helpers-js": "dev-master",
     "pckg/helpers-less": "dev-master",
-    "pckg/import": "dev-master",
-    "pckg/payment": "dev-master",
     "pckg-app/api": "dev-master",
     "pckg/manager": "dev-master",
     "jonnyw/php-phantomjs": "4.*",
@@ -35,7 +33,6 @@
     "defuse/php-encryption": "^2.0",
     "symfony/dependency-injection": "3.3.*",
     "guzzlehttp/guzzle": "6.*",
-    "maximebf/debugbar": "dev-master",
     "ext-openssl": "*",
     "ramsey/uuid": "^4.0@dev"
   },
