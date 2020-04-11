@@ -23,7 +23,7 @@ class AppKey
             'company' => $appKey->app->company,
             'user' => $appKey->app->user,
             'certificate' => [
-                'invisiblePassword' => null,
+                'invisiblePassword' => $appKey->app->company->getInvisiblePasswordAttribute(),
             ]
         ];
     }
