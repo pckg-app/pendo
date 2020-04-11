@@ -100,28 +100,7 @@
                 });
             },
             initialFetch: function () {
-                this.company = {
-                    short_name: 'Bojan Rajh s.p.',
-                    vat_number: '82766347',
-                    country: {
-                        code: 'SI'
-                    }
-                };
-                this.user = {
-                    email: 'bojan.rajh.sp@gmail.com'
-                };
-                this.appKey = {
-                    key: 'hidden',
-                    app: {
-                        id: 'wsd58a5a'
-                    }
-                };
-                /*this.certificate = {
-                    invisiblePassword: 'a*********z'
-                };*/
-                this.loading = false;
-                return;
-                http.get('/api/api-key/' + this.apiKey, function (data) {
+                http.get('/api/app-key/' + this.apiKey, function (data) {
                     this.company = data.company;
                     this.user = data.user;
                     this.appKey = data.appKey;

@@ -17,4 +17,15 @@ class AppKey
         ];
     }
 
+    public function getAppKeyAction(\Pckg\Pendo\Record\AppKey $appKey)
+    {
+        return [
+            'company' => $appKey->app->company,
+            'user' => $appKey->app->user,
+            'certificate' => [
+                'invisiblePassword' => null,
+            ]
+        ];
+    }
+
 }

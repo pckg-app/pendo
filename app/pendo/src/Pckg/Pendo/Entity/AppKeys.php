@@ -10,7 +10,7 @@ class AppKeys extends \Pckg\Api\Entity\AppKeys
     public function app()
     {
         return $this->belongsTo(Apps::class)
-                    ->foreignKey('app_id');
+            ->foreignKey('app_id');
     }
 
 }
