@@ -93,11 +93,15 @@ class Pendo
                  */
                 $message = $validator->makePemFromP12($path . $hash, $password);
                 if ($message === true) {
+                    $key = Key::createNewRandomKey();
+                    $asciiKey = $key->saveToAsciiSafeString();
                     $appKey->app->company->setAndSave([
                         'p12' => $hash,
                         'pem' => str_replace('.p12', '.pem', $hash),
                         'server' => $appKey->app->company->country->code === 'SI' ? 'SIGOV-CA-2018.pem' : 'finaprodmerged.pem',
                         'mode' => 'prod',
+                        'hash' => $asciiKey,
+                        'password' => Crypto::encrypt($password, $key),
                     ]);
                 } else {
                     $status = 'ERROR_PEM';
