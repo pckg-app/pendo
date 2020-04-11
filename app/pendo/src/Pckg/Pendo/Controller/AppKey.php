@@ -20,7 +20,7 @@ class AppKey
     public function getAppKeyAction(\Pckg\Pendo\Record\AppKey $appKey)
     {
         return [
-            'company' => $appKey->app->company,
+            'company' => only($appKey->app->company, ['id', 'country', 'vat_number', 'business_number']),
             'user' => $appKey->app->user,
             'certificate' => [
                 'invisiblePassword' => $appKey->app->company->getInvisiblePasswordAttribute(),
