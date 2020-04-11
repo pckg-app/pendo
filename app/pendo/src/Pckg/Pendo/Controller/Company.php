@@ -1,6 +1,8 @@
 <?php namespace Pckg\Pendo\Controller;
 
 use Exception;
+use Pckg\Pendo\Form\RegisterCompany;
+use Pckg\Pendo\Record\AppKey;
 use Pckg\Pendo\Record\Company as CompanyRecord;
 
 /**
@@ -12,32 +14,27 @@ class Company
 {
 
     /**
-     * @return \Pckg\Framework\Response
      * @throws Exception
      */
-    public function postRegisterAction()
+    public function postRegisterAction(RegisterCompany $registerCompany, AppKey $appKey)
     {
         /**
          * Get posted data.
          */
-        $companyData = only(post()->all(), ['vat_number', 'validity_date']);
-
-        /**
-         * Check if company is already registered.
-         */
-        if (Company::gets(['vat_number' => $companyData['vat_number']])) {
-            throw new Exception('Company is already registered');
-        }
+        $companyData = $registerCompany->getData();
 
         /**
          * Create new company.
          */
-        $company = CompanyRecord::create($companyData);
+        $company = CompanyRecord::getOrCreate(only($companyData, ['vat_number']), null, $companyData);
 
         /**
          * Return company.
          */
-        return response()->respondWithSuccess(['company' => $company]);
+        return [
+            'success' => true,
+            'company' => only($company, ['id', 'vat_number']),
+        ];
     }
 
 }

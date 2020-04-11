@@ -34,6 +34,8 @@ class Pendo
         //return view('Pckg/Pendo:pendo/configure', ['appKey' => $appKey, 'configureForm' => $configureForm]);
     }
 
+    public function deleteUploadCertificateAction() {}
+
     public function postUploadCertificateAction(AppKey $appKey)
     {
         $upload = new Upload('file', ['application/x-pkcs12', 'application/octet-stream']);

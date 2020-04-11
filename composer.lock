@@ -1976,12 +1976,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pckg/framework.git",
-                "reference": "3fc27332e6f3ff810b9a26ad25cefdea29e211e8"
+                "reference": "b8487b4822362ffadfc7bb6d738e5d49e62fd4f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pckg/framework/zipball/3fc27332e6f3ff810b9a26ad25cefdea29e211e8",
-                "reference": "3fc27332e6f3ff810b9a26ad25cefdea29e211e8",
+                "url": "https://api.github.com/repos/pckg/framework/zipball/b8487b4822362ffadfc7bb6d738e5d49e62fd4f8",
+                "reference": "b8487b4822362ffadfc7bb6d738e5d49e62fd4f8",
                 "shasum": ""
             },
             "require": {
@@ -2019,7 +2019,7 @@
             ],
             "description": "Fully featured lightweight php framework with multilingual support, twig templating engine, and tons of other features.",
             "homepage": "https://github.com/pckg/framework",
-            "time": "2020-04-06T15:51:55+00:00"
+            "time": "2020-04-11T15:11:19+00:00"
         },
         {
             "name": "pckg/generic",
@@ -2027,12 +2027,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pckg/generic.git",
-                "reference": "1703d9b48a3bfd2de879d6b6795b1bd3679bcdeb"
+                "reference": "2ea8ab0f226c3635ebf9696ded191980c4e417ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pckg/generic/zipball/1703d9b48a3bfd2de879d6b6795b1bd3679bcdeb",
-                "reference": "1703d9b48a3bfd2de879d6b6795b1bd3679bcdeb",
+                "url": "https://api.github.com/repos/pckg/generic/zipball/2ea8ab0f226c3635ebf9696ded191980c4e417ac",
+                "reference": "2ea8ab0f226c3635ebf9696ded191980c4e417ac",
                 "shasum": ""
             },
             "require": {
@@ -2058,7 +2058,7 @@
             ],
             "description": "Building admin interface and generic frontend made simple",
             "homepage": "https://github.com/pckg/generic",
-            "time": "2020-04-09T21:41:08+00:00"
+            "time": "2020-04-11T15:11:50+00:00"
         },
         {
             "name": "pckg/helpers-js",
@@ -2276,12 +2276,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pckg/manager.git",
-                "reference": "f1dbb3a48c68b368f7ff0a055c200fed68d81e67"
+                "reference": "a3e2bccc61294f32c3ec624dd7f2dd7a1d775789"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pckg/manager/zipball/f1dbb3a48c68b368f7ff0a055c200fed68d81e67",
-                "reference": "f1dbb3a48c68b368f7ff0a055c200fed68d81e67",
+                "url": "https://api.github.com/repos/pckg/manager/zipball/a3e2bccc61294f32c3ec624dd7f2dd7a1d775789",
+                "reference": "a3e2bccc61294f32c3ec624dd7f2dd7a1d775789",
                 "shasum": ""
             },
             "require": {
@@ -2305,7 +2305,7 @@
             ],
             "description": "Asset management, meta / seo, locale, vue.js and everything else that projects need to manage",
             "homepage": "https://github.com/pckg/manager",
-            "time": "2020-03-15T12:47:59+00:00"
+            "time": "2020-04-11T15:13:19+00:00"
         },
         {
             "name": "pckg/migrator",
@@ -4829,12 +4829,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionCommon.git",
-                "reference": "b0843c8cbcc2dc5eda5158e583c7199a5e44c86d"
+                "reference": "74a67151cce1fe4aa5960636ae510ddf1faefdb3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionCommon/zipball/b0843c8cbcc2dc5eda5158e583c7199a5e44c86d",
-                "reference": "b0843c8cbcc2dc5eda5158e583c7199a5e44c86d",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionCommon/zipball/74a67151cce1fe4aa5960636ae510ddf1faefdb3",
+                "reference": "74a67151cce1fe4aa5960636ae510ddf1faefdb3",
                 "shasum": ""
             },
             "require": {
@@ -4873,7 +4873,7 @@
                 "reflection",
                 "static analysis"
             ],
-            "time": "2019-12-20T12:45:35+00:00"
+            "time": "2020-04-10T20:41:10+00:00"
         },
         {
             "name": "phpdocumentor/reflection-docblock",

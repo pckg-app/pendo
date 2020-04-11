@@ -4,30 +4,37 @@
             Loading ...
         </div>
         <div v-else-if="!certificate || !certificate.invisiblePassword">
-            <p>Upload certificate and enter certificates password for company <b>{{ company.short_name }}</b>,
+            <p>Upload certificate password for company <b>{{ company.short_name }}</b>,
                 VAT number <b>{{ company.vat_number }}</b>.</p>
 
             <pckg-htmlbuilder-dropzone :url="'/configure/' + apiKey + '/certificate'"
                                        id="certificate-upload"
                                        :params="{acceptedFiles: 'application/x-pkcs12'}"
+                                       :preview="false"
                                        @uploaded="certificateUploaded"></pckg-htmlbuilder-dropzone>
 
-            <div class="form-group" v-if="certificate">
-                <label>Certificate password</label>
-                <input type="password" class="form-control" v-model="certificate.password"/>
-            </div>
+            <template v-if="certificate">
+                <div class="form-group">
+                    <label>Certificate password</label>
+                    <input type="password" class="form-control" v-model="certificate.password"/>
+                </div>
 
-            <b v-if="errorCode">{{ errorCode }}</b>
+                <div class="form-group">
+                    <button type="button" @click.prevent="checkCertificate" class="btn btn-primary"
+                            :disabled="!certificate || (certificate.password || '').length < 6">Validate and save
+                    </button>
+                </div>
+            </template>
 
-            <button type="button" @click.prevent="checkCertificate" class="btn btn-primary"
-                    :disabled="!certificate || (certificate.password || '').length < 6">Check validity
-            </button>
+            <b v-if="errorCode" style="color: red;">{{ errorCode }}</b>
+
         </div>
         <div v-else-if="certificate.password">
 
-            <p>Success! You have successfully connected certificate. Now you can start fiscalizing your invoices.</p>
+            <p>Your certificate was successfully activated. Make sure to set correct invoice settings, activate payment
+                methods and add permissions for cashiers.</p>
 
-            <button type="button" @click.prevent="certificate.password = null" class="btn btn-primary">Continue</button>
+            <button type="button" @click.prevent="certificate.password = null" class="btn btn-primary">Finish</button>
 
         </div>
         <div v-else>
@@ -115,7 +122,10 @@
                 this.loading = false;
                 return;
                 http.get('/api/api-key/' + this.apiKey, function (data) {
-                    this.apiKeyObject = data.apiKey;
+                    this.company = data.company;
+                    this.user = data.user;
+                    this.appKey = data.appKey;
+                    this.certificate = data.certificate;
                     this.loading = false;
                 }.bind(this), function () {
                     this.state = 'error';

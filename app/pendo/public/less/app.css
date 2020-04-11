@@ -1,3 +1,14 @@
 .c-pckg-htmlbuilder-dropzone {
-  border: 1px solid lightblue;
+  padding: 2rem;
+  background: #eee;
+}
+.as-table {
+  display: table;
+  width: 100%;
+}
+.as-table > div {
+  display: table-cell;
+}
+.form-group {
+  margin-top: 1.5rem;
 }
