@@ -16,6 +16,8 @@ class RegisterCompany extends Form implements Form\ResolvesOnRequest
         $this->addText('address_line2')->required();
         $this->addDate('incorporated_at')->required();
 
+        $this->addSelect('user_id')->required();
+
         return $this;
     }
 
