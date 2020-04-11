@@ -46,9 +46,9 @@
             <!--<p>Comms store: <b>{{ appKey.app.id }}</b></p>-->
             <!--<p>Certificate: <b>{{ certificate.invisiblePassword }}</b></p>-->
             <hr/>
-            <button class="btn btn-info" @click.prevent="makeEchoTest">Make echo test</button>
+            <!--<button class="btn btn-info" @click.prevent="makeEchoTest">Make echo test</button>
             &nbsp;
-            <button class="btn btn-info" @click.prevent="makeInvoiceTest">Make invoice test</button>
+            <button class="btn btn-info" @click.prevent="makeInvoiceTest">Make invoice test</button>-->
         </div>
     </div>
 </template>
