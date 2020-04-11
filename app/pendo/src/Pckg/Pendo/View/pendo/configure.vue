@@ -38,7 +38,7 @@
 
         </div>
         <div v-else>
-            <!--<p>Country: <b>{{ company.country.code }}</b></p>-->
+            <p>Country: <b>{{ company.country.code }}</b></p>
             <p>Company: <b>{{ company.short_name }}</b></p>
             <p>VAT number: <b>{{ company.vat_number }}</b></p>
             <p>Business number: <b>{{ company.business_number }}</b></p>
