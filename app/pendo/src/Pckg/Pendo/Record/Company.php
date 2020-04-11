@@ -25,6 +25,8 @@ class Company extends Record
 
     protected $entity = Companies::class;
 
+    protected $toArray = ['country'];
+
     public function getCountryCode()
     {
         return strtolower(substr($this->vat_number, 0, 2));
