@@ -107,7 +107,7 @@ class Pendo
                     $status = 'ERROR_PEM';
                 }
             } else {
-                $status = 'ERROR_COMPANY';
+                $status = 'ERROR_COMPANY:VAT:' . $props['vatNumber'];
             }
         }
 
