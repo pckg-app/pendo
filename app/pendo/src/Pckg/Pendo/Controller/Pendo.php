@@ -84,7 +84,8 @@ class Pendo
          * Update company to the new certificate.
          */
         if ($status === Certificate::CODE_SUCCESS) {
-            if ($appKey->app->company->vat_number === $props['vatNumber']) {
+            if ($appKey->app->company->vat_number === $props['vatNumber']
+                || ($appKey->app->company->vat_number === ($appKey->app->company->country->code . $props['vatNumber']))) {
                 /**
                  * Assign certificate.
                  * + Make pem?
