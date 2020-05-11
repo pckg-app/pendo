@@ -647,7 +647,7 @@ class Furs extends AbstractService
                     }
                 }
             } else {
-                var_dump(curl_error($conn));
+                error_log(curl_error($conn));
             }
             curl_close($conn);
         } catch (\Throwable $e) {
