@@ -10,6 +10,9 @@
     }
   ],
   "require": {
+    "ext-dom": "*",
+    "ext-xmlwriter": "*",
+    "ext-curl": "*",
     "pckg/framework": "dev-master",
     "pckg/migrator": "dev-master",
     "pckg/queue": "dev-master",

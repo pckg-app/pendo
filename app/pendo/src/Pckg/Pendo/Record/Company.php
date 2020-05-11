@@ -58,8 +58,13 @@ class Company extends Record
                 : 'https://cistest.apis-it.hr:8449/FiskalizacijaServiceTest';
         }
 
+        $vatNumber = $this->vat_number;
+        if (strpos($vatNumber, 'HR') === 0 || strpos($vatNumber, 'SI') === 0) {
+            $vatNumber = substr($vatNumber, 2);
+        }
+
         return new Config(
-            substr($this->vat_number, 2), // remove country prefix
+            $vatNumber,
             $certsPath . $this->pem,
             $certsPath . $this->p12,
             $key,

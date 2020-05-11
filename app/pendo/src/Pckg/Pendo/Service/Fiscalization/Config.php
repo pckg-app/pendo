@@ -24,7 +24,7 @@ class Config
         $softwareSupplierTaxNumber,
     $url = null
     ) {
-        $this->taxNumber = substr($taxNumber, 2);
+        $this->taxNumber = $taxNumber;
         $this->pemCert = $pemCert;
         $this->p12Cert = $p12Cert;
         $this->password = $password;

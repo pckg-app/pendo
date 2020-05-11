@@ -18,6 +18,8 @@ use RobRichards\XMLSecLibs\XMLSecurityKey;
 class Furs extends AbstractService
 {
 
+    protected $invoiceData = [];
+
     public function envelopeDocument()
     {
         // TODO: Implement envelopeDocument() method.
@@ -307,6 +309,7 @@ class Furs extends AbstractService
     public function createInvoiceMsg(array $invoiceData = [])
     {
         $this->type = 'invoice';
+        $this->invoiceData = $invoiceData;
         $this->createMsg();
     }
 
@@ -346,6 +349,57 @@ class Furs extends AbstractService
             $invoiceAmount = '0.00';
             $paymentAmount = '0.00';
         }
+
+        /**
+         * Collect taxes.
+         */
+        $fuTaxesPerSeller = [
+            'name' => 'fu:TaxesPerSeller',
+            /*'children' => [
+                0 => [
+                    'name'   => 'fu:VAT',
+                    'children' => [
+                        0 => [
+                            'name'  => 'fu:TaxRate',
+                            'value' => '22.0',
+                        ],
+                        1 => [
+                            'name'  => 'fu:TaxableAmount',
+                            'value' => '0',
+                        ],
+                        2 => [
+                            'name'  => 'fu:TaxAmount',
+                            'value' => '0',
+                        ],
+                    ],
+                ],
+            ],*/
+        ];
+
+        $taxChildren = [];
+        foreach ($this->invoiceData['taxes'] ?? [] as $tax => $taxData) {
+            $taxChildren[] = [
+                'name' => 'fu:VAT',
+                'children' => [
+                    [
+                        'name' => 'fu:TaxRate',
+                        'value' => number_format($tax, 2),
+                    ],
+                    [
+                        'name' => 'fu:TaxableAmount',
+                        'value' => number_format($taxData['base'], 2, '.', ''),
+                    ],
+                    [
+                        'name' => 'fu:TaxAmount',
+                        'value' => number_format($taxData['vat'], 2, '.', ''),
+                    ],
+                ],
+            ];
+        }
+        if ($taxChildren) {
+            $fuTaxesPerSeller['children'] = $taxChildren;
+        }
+
         $bodyInvoice = [
             'name'     => 'fu:Invoice',
             'children' => [
@@ -386,31 +440,10 @@ class Furs extends AbstractService
                     'name'  => 'fu:PaymentAmount',
                     'value' => $paymentAmount,
                 ],
-                [
-                    'name' => 'fu:TaxesPerSeller',
-                    /*'children' => [
-                        0 => [
-                            'name'   => 'fu:VAT',
-                            'children' => [
-                                0 => [
-                                    'name'  => 'fu:TaxRate',
-                                    'value' => '22.0',
-                                ],
-                                1 => [
-                                    'name'  => 'fu:TaxableAmount',
-                                    'value' => '0',
-                                ],
-                                2 => [
-                                    'name'  => 'fu:TaxAmount',
-                                    'value' => '0',
-                                ],
-                            ],
-                        ],
-                    ],*/
-                ],
+                $fuTaxesPerSeller,
                 [
                     'name'  => 'fu:OperatorTaxNumber',
-                    'value' => $this->business->getTaxNumber(),
+                    'value' => $this->invoiceData['operator'] ?? $this->business->getTaxNumber(),
                 ],
                 [
                     'name'  => 'fu:ProtectedID',

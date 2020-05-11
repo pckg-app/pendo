@@ -27,11 +27,9 @@ class Invoice
             'total',
             'payment',
             'taxes',
-            'person',
+            'operator',
             'business',
             'device',
-            'mode',
-            'handler',
         ];
         $invoiceData = only(post()->all(), $keys);
 
@@ -56,6 +54,16 @@ class Invoice
          * Get some data from apiKey.
          */
         $invoiceData['vat_number'] = substr($company->vat_number, 2);
+
+        /**
+         * Set handler.
+         */
+        $invoiceData['handler'] = $company->country->code === 'SI' ? 'furs' : 'purh';
+
+        /**
+         * And mode.
+         */
+        $invoiceData['mode'] = $company->type;
 
         /**
          * Create fiscalizator and fiscalize bill.

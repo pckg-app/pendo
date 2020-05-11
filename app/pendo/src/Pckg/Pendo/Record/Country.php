@@ -32,9 +32,13 @@ class Country extends Record
         }
 
         $key = $company->getDecodedPasswordAttribute();
+        $vatNumber = $company->vat_number;
+        if (strpos($vatNumber, 'HR') === 0 || strpos($vatNumber, 'SI') === 0) {
+            $vatNumber = substr($vatNumber, 2);
+        }
 
         $config = new Config(
-            $company->vat_number,
+            $vatNumber,
             $certsPath . $company->pem,
             $certsPath . $company->p12,
             $key,
