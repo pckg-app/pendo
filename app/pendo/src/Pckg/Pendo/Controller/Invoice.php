@@ -17,6 +17,10 @@ class Invoice
      */
     public function postConfirmAction(AppKey $appKey)
     {
+        if (!$appKey->id) {
+            throw new Exception('AppKey ID not set.');
+        }
+        
         /**
          * Get posted data.
          */
