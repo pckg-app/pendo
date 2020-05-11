@@ -5,6 +5,7 @@ require_once path('root') . 'vendor/robrichards/xmlseclibs/xmlseclibs.php';
 
 use DOMDocument;
 use DOMXPath;
+use Pckg\Pendo\Service\Certificate;
 use Pckg\Pendo\Service\Fiscalization\AbstractService;
 use Pckg\Pendo\Service\Fiscalization\Business;
 use Pckg\Pendo\Service\Fiscalization\Invoice;
@@ -648,7 +649,15 @@ class Furs extends AbstractService
                 }
             } else {
                 error_log(curl_error($conn));
-                error_log('DEBUG: Is readable PemCert: ' . (is_readable($this->config->getPemCert()) ? 'yes' : 'no'));
+                $readable = is_readable($this->config->getPemCert());
+                error_log('DEBUG: Is readable PemCert: ' . ($readable ? 'yes' : 'no'));
+                if ($readable) {
+                    $exploded = explode('/', $this->config->getPemCert());
+                    $file = end($exploded);
+                    $path = substr($this->config->getPemCert(), 0, -1-strlen($file));
+                    (new Certificate())->getInfo($props, $path, $file, $this->config->getPassword());
+                    error_log('Cert Props: ' . json_encode($props));
+                }
                 error_log('DEBUG: Is readable ServerCert: ' . (is_readable($this->config->getServerCert()) ? 'yes' : 'no'));
             }
             curl_close($conn);
