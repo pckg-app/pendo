@@ -655,8 +655,8 @@ class Furs extends AbstractService
                     $exploded = explode('/', $this->config->getPemCert());
                     $file = end($exploded);
                     $path = substr($this->config->getPemCert(), 0, -1-strlen($file));
-                    (new Certificate())->getInfo($props, $path, $file, $this->config->getPassword());
-                    error_log('Cert Props: ' . json_encode($props));
+                    $state = (new Certificate())->getInfo($props, $path, $file, $this->config->getPassword());
+                    error_log('Cert Props: ' . $state . ' ' . json_encode($props));
                 }
                 error_log('DEBUG: Is readable ServerCert: ' . (is_readable($this->config->getServerCert()) ? 'yes' : 'no'));
             }
