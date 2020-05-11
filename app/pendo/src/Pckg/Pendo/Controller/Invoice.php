@@ -20,7 +20,7 @@ class Invoice
         if (!$appKey->id) {
             throw new Exception('AppKey ID not set.');
         }
-        
+
         /**
          * Get posted data.
          */

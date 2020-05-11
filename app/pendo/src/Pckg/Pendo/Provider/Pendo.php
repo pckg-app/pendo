@@ -99,7 +99,7 @@ class Pendo extends Provider
                 'tags' => ['auth:in'],
             ],
                 [
-                    '.confirm' => route('/confirm', 'confirm')->resolvers([ApiKey::class]),
+                    '.confirm' => route('/confirm', 'confirm'),
                 ]),
             routeGroup([
                 'controller' => PendoController::class,
