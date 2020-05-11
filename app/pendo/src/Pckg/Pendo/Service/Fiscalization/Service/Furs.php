@@ -648,6 +648,8 @@ class Furs extends AbstractService
                 }
             } else {
                 error_log(curl_error($conn));
+                error_log('DEBUG: Is readable PemCert: ' . (is_readable($this->config->getPemCert()) ? 'yes' : 'no'));
+                error_log('DEBUG: Is readable ServerCert: ' . (is_readable($this->config->getServerCert()) ? 'yes' : 'no'));
             }
             curl_close($conn);
         } catch (\Throwable $e) {
