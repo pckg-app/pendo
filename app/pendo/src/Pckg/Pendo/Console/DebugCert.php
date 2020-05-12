@@ -24,7 +24,10 @@ class DebugCert extends Command
             ], InputArgument::REQUIRED)
             ->addArguments([
                 'pass' => 'Password',
-            ], InputArgument::OPTIONAL);
+            ], InputArgument::OPTIONAL)
+        ->addOptions([
+            'regenerate' => 'Regenerate .pem'
+        ], InputOption::VALUE_NONE);
     }
 
     public function handle()
@@ -43,6 +46,12 @@ class DebugCert extends Command
             $this->output($status, 'error');
         }
         d($props);
+        if (!$this->option('regenerate')) {
+            return;
+        }
+
+        $this->outputDated('Regenerating');
+        (new Certificate())->makePemFromP12($path . $file, $pass);
     }
 
 }

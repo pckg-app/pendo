@@ -99,18 +99,21 @@ class Certificate
         $worked = openssl_pkcs12_read(file_get_contents($filename), $results, $password);
 
         if (!$worked) {
-            return openssl_error_string() ?? 'OPENSSL error';
+            return openssl_error_string() ?? 'OPENSSL error reading';
         } elseif (!($results['pkey'] ?? null)) {
             return 'NOKEY';
         }
 
-        $result = null;
-        $worked = openssl_pkey_export($results['pkey'], $result, $password);
+        /**
+         * Export private key.
+         */
+        $privateKey = null;
+        $worked = openssl_pkey_export($results['pkey'], $privateKey, $password);
         if (!$worked) {
-            return openssl_error_string() ?? 'OPENSSL error2';
+            return openssl_error_string() ?? 'OPENSSL error exporting private key';
         }
 
-        file_put_contents($pem, $result);
+        file_put_contents($pem, $privateKey . $results['cert']);
 
         return true;
     }
