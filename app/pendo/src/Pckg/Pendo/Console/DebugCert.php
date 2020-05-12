@@ -2,6 +2,7 @@
 
 use Pckg\Framework\Console\Command;
 use Pckg\Pendo\Entity\Companies;
+use Pckg\Pendo\Record\Company;
 use Pckg\Pendo\Service\Certificate;
 use Pckg\Pendo\Service\Fiscalization\Invoice;
 use Symfony\Component\Console\Input\InputArgument;
@@ -25,9 +26,12 @@ class DebugCert extends Command
             ->addArguments([
                 'pass' => 'Password',
             ], InputArgument::OPTIONAL)
-        ->addOptions([
-            'regenerate' => 'Regenerate .pem'
-        ], InputOption::VALUE_NONE);
+            ->addOptions([
+                'regenerate' => 'Regenerate .pem'
+            ], InputOption::VALUE_NONE)
+            ->addOptions([
+                'regenerate' => 'Use company instead of password'
+            ], InputOption::VALUE_REQUIRED);
     }
 
     public function handle()
@@ -41,11 +45,15 @@ class DebugCert extends Command
         $path = path('private') . 'company/certificate/';
         $pass = $this->argument('pass');
 
+        if ($company = $this->option('company')) {
+            $pass = Company::getOrFail($company)->decodedPassword;
+        }
+
         $status = (new Certificate())->getInfo($props, $path, $file, $pass);
         if ($status !== Certificate::CODE_SUCCESS) {
             $this->output($status, 'error');
         }
-        d($props);
+
         if (!$this->option('regenerate')) {
             return;
         }
