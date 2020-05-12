@@ -47,6 +47,7 @@ class DebugCert extends Command
 
         if ($company = $this->option('company')) {
             $pass = Company::getOrFail($company)->decodedPassword;
+            $this->outputDated('Using pass ' . $pass);
         }
 
         $status = (new Certificate())->getInfo($props, $path, $file, $pass);
