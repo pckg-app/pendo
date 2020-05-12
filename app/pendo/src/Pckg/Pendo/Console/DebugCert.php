@@ -48,13 +48,13 @@ class DebugCert extends Command
         $pass = $this->argument('pass');
 
         if ($company = $this->option('company')) {
-            $key = Key::createNewRandomKey();
+            /*$key = Key::createNewRandomKey();
             $asciiKey = $key->saveToAsciiSafeString();
             Company::getOrFail($company)->setAndSave([
                 'hash' => $asciiKey,
                 'password' => Crypto::encrypt($pass, $key),
             ]);
-
+*/
             $pass = Company::getOrFail($company)->decodedPassword;
             $this->outputDated('Using pass ' . $pass);
         }
