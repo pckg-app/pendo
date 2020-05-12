@@ -30,7 +30,7 @@ class DebugCert extends Command
                 'regenerate' => 'Regenerate .pem'
             ], InputOption::VALUE_NONE)
             ->addOptions([
-                'regenerate' => 'Use company instead of password'
+                'company' => 'Use company instead of password'
             ], InputOption::VALUE_REQUIRED);
     }
 
