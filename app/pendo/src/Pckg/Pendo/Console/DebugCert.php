@@ -36,10 +36,10 @@ class DebugCert extends Command
 
     public function handle()
     {
-        /*$companies = (new Companies())->all();
+        $companies = (new Companies())->all();
         foreach ($companies as $company) {
             d($company->vat_number, $company->decodedPassword, $company->p12, "");
-        }*/
+        }
 
         $file = $this->argument('file');
         $path = path('private') . 'company/certificate/';
