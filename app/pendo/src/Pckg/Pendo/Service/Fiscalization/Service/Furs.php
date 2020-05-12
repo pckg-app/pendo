@@ -379,6 +379,9 @@ class Furs extends AbstractService
 
         $taxChildren = [];
         foreach ($this->invoiceData['taxes'] ?? [] as $tax => $taxData) {
+            if (strlen($tax) === 0) {
+                continue; // skip some taxes?
+            }
             $taxChildren[] = [
                 'name' => 'fu:VAT',
                 'children' => [
@@ -656,9 +659,10 @@ class Furs extends AbstractService
                     $file = end($exploded);
                     $path = substr($this->config->getPemCert(), 0, -strlen($file));
                     $state = (new Certificate())->getInfo($props, $path, $file, $this->config->getPassword());
-                    error_log('Cert Props: ' . $state . ' ' . json_encode($props));
+                    error_log('Client Props: ' . $state . ' ' . json_encode($props));
                 }
-                error_log('DEBUG: Is readable ServerCert: ' . (is_readable($this->config->getServerCert()) ? 'yes' : 'no'));
+                $readable = is_readable($this->config->getServerCert());
+                error_log('DEBUG: Is readable ServerCert: ' . ($readable ? 'yes' : 'no'));
             }
             curl_close($conn);
         } catch (\Throwable $e) {
