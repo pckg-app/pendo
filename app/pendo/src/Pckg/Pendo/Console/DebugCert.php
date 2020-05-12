@@ -1,5 +1,7 @@
 <?php namespace Pckg\Pendo\Console;
 
+use Defuse\Crypto\Crypto;
+use Defuse\Crypto\Key;
 use Pckg\Framework\Console\Command;
 use Pckg\Pendo\Entity\Companies;
 use Pckg\Pendo\Record\Company;
@@ -36,16 +38,23 @@ class DebugCert extends Command
 
     public function handle()
     {
-        $companies = (new Companies())->all();
+        /*$companies = (new Companies())->all();
         foreach ($companies as $company) {
             d($company->vat_number, $company->decodedPassword, $company->p12, "");
-        }
+        }*/
 
         $file = $this->argument('file');
         $path = path('private') . 'company/certificate/';
         $pass = $this->argument('pass');
 
         if ($company = $this->option('company')) {
+            $key = Key::createNewRandomKey();
+            $asciiKey = $key->saveToAsciiSafeString();
+            Company::getOrFail($company)->setAndSave([
+                'hash' => $asciiKey,
+                'password' => Crypto::encrypt($pass, $key),
+            ]);
+
             $pass = Company::getOrFail($company)->decodedPassword;
             $this->outputDated('Using pass ' . $pass);
         }
