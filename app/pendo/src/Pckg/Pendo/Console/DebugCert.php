@@ -51,7 +51,8 @@ class DebugCert extends Command
         }
 
         $this->outputDated('Regenerating');
-        (new Certificate())->makePemFromP12($path . $file, $pass);
+        $ok = (new Certificate())->makePemFromP12($path . $file, $pass);
+        $this->outputDated('Regenerated: ' . $ok);
     }
 
 }
