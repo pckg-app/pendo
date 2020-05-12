@@ -48,12 +48,14 @@ class Certificate
             try {
                 $content = openssl_x509_read($cert);
             } catch (\Throwable $e) {
+                error_log(exception($e));
                 return static::CODE_ERROR_READ;
             }
         } elseif (strpos($file, '.p12')) {
             try {
                 openssl_pkcs12_read($cert, $certs, $pass);
             } catch (\Throwable $e) {
+                error_log(exception($e));
                 return static::CODE_ERROR_OPENSSL;
             }
             if ($e = openssl_error_string()) {
@@ -71,6 +73,7 @@ class Certificate
         try {
             $data = openssl_x509_parse($content);
         } catch (\Throwable $e) {
+            error_log(exception($e));
             return static::CODE_ERROR_PARSE;
         }
 
