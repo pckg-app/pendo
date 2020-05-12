@@ -379,7 +379,7 @@ class Furs extends AbstractService
 
         $taxChildren = [];
         foreach ($this->invoiceData['taxes'] ?? [] as $tax => $taxData) {
-            if (strlen($tax) === 0) {
+            if (strlen($tax) > 5) { // notCharged, notDisplayedOrCharged, ...
                 continue; // skip some taxes?
             }
             $taxChildren[] = [
