@@ -48,6 +48,6 @@ jobs:
         run: |
           mkdir -p /home/runner/.docker
           touch /home/runner/.docker/config.json
-          echo "$DOCKER_HUB_JSON" > /home/runner/.docker/config.json
+          echo $DOCKER_HUB_JSON > /home/runner/.docker/config.json
           docker build -t registry.digitalocean.com/pckg-app/pendo:$GITHUB_SHA .
           docker push registry.digitalocean.com/pckg-app/pendo:$GITHUB_SHA
