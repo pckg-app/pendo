@@ -15,9 +15,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: borales/actions-yarn@v2.0.0
-
-      #- name: Validate composer.json and composer.lock
-      #  run: composer validate
+      - uses: actions/cache@v2
+          
+      - name: Validate composer.json and composer.lock
+        run: composer validate
 
       #- name: Cache Composer packages
       #  id: composer-cache
@@ -30,7 +31,6 @@ jobs:
 
       #- name: Cache NPM packages
       #  id: npm-cache
-      #  uses: actions/cache@v2
       #  with:
       #    path: node_modules
       #    key: ${{ runner.os }}-npm-${{ hashFiles('**/composer.lock') }}
@@ -38,23 +38,20 @@ jobs:
       #      ${{ runner.os }}-npm-
 
       - name: Install dependencies
-      - uses: borales/actions-yarn@v2.0.0
         run:
           - composer install --no-dev --prefer-dist --no-progress --no-suggest --optimize-autoloader --ignore-platform-reqs
           - yarn install --production --silent
 
       - name: Build the Docker image
-      - uses: actions/checkout@v2
-        run: mkdir ~/.docker && touch ~/.docker/config.json && echo $DOCKER_HUB_JSON > ~/.docker/config.json && docker build -t registry.digitalocean.com/pckg-app/pendo:$GITHUB_SHA . && docker push registry.digitalocean.com/pckg-app/pendo:$GITHUB_SHA && curl -d repository=https://github.com/$GITHUB_REPOSITORY.git -d branch=$GITHUB_BRANCH -d PCKG_BUILD_ID=$GITHUB_SHA http://condo.foobar.si/webhook
+        run:
+          # auth docker
+          - mkdir ~/.docker
+          - touch ~/.docker/config.json
+          - echo $DOCKER_HUB_JSON > ~/.docker/config.json
 
-          ## auth docker
-          #- mkdir ~/.docker
-          #- touch ~/.docker/config.json
-          #- echo $DOCKER_HUB_JSON > ~/.docker/config.json
+          # build and push
+          - docker build -t registry.digitalocean.com/pckg-app/pendo:$GITHUB_SHA .
+          - docker push registry.digitalocean.com/pckg-app/pendo:$GITHUB_SHA
 
-          ## build and push
-          #- docker build -t registry.digitalocean.com/pckg-app/pendo:$GITHUB_SHA .
-          #- docker push registry.digitalocean.com/pckg-app/pendo:$GITHUB_SHA
-
-          ## notify condo about the deploy
-          #- curl -d repository=https://github.com/$GITHUB_REPOSITORY.git -d branch=$GITHUB_BRANCH -d PCKG_BUILD_ID=$GITHUB_SHA http://condo.foobar.si/webhook
+          # notify condo about the deploy
+          - curl -d repository=https://github.com/$GITHUB_REPOSITORY.git -d branch=$GITHUB_BRANCH -d PCKG_BUILD_ID=$GITHUB_SHA http://condo.foobar.si/webhook
