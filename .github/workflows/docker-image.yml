@@ -43,8 +43,8 @@ jobs:
           - composer install --no-dev --prefer-dist --no-progress --no-suggest --optimize-autoloader --ignore-platform-reqs
           - yarn install --production --silent
 
-      - uses: actions/checkout@v2
       - name: Build the Docker image
+      - uses: actions/checkout@v2
         run:
           # auth docker
           - mkdir ~/.docker
