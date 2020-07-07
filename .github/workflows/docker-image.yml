@@ -1,0 +1,60 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: borales/actions-yarn@v2.0.0
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v2
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Cache NPM packages
+        id: npm-cache
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
+      - name: Install dependencies
+      - uses: borales/actions-yarn@v2.0.0
+        run:
+          - composer install --no-dev --prefer-dist --no-progress --no-suggest --optimize-autoloader --ignore-platform-reqs
+          - yarn install --production --silent
+
+      - uses: actions/checkout@v2
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+
+          # auth docker
+          - mkdir ~/.docker
+          - touch ~/.docker/config.json
+          - echo $DOCKER_HUB_JSON > ~/.docker/config.json
+
+          # build and push
+          - docker build -t registry.digitalocean.com/pckg-app/pendo:$BITBUCKET_COMMIT .
+          - docker push registry.digitalocean.com/pckg-app/pendo:$BITBUCKET_COMMIT
+
+          # notify condo about the deploy
+          - curl -d repository=https://github.com/$GITHUB_REPOSITORY.git -d branch=$GITHUB_BRANCH -d PCKG_BUILD_ID=$GITHUB_SHA http://condo.foobar.si/webhook
