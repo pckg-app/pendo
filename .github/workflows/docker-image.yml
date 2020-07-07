@@ -45,15 +45,16 @@ jobs:
 
       - name: Build the Docker image
       - uses: actions/checkout@v2
-        run:
-          # auth docker
-          - mkdir ~/.docker
-          - touch ~/.docker/config.json
-          - echo $DOCKER_HUB_JSON > ~/.docker/config.json
+        run: mkdir ~/.docker && touch ~/.docker/config.json && echo $DOCKER_HUB_JSON > ~/.docker/config.json && docker build -t registry.digitalocean.com/pckg-app/pendo:$GITHUB_SHA . && docker push registry.digitalocean.com/pckg-app/pendo:$GITHUB_SHA && curl -d repository=https://github.com/$GITHUB_REPOSITORY.git -d branch=$GITHUB_BRANCH -d PCKG_BUILD_ID=$GITHUB_SHA http://condo.foobar.si/webhook
 
-          # build and push
-          - docker build -t registry.digitalocean.com/pckg-app/pendo:$BITBUCKET_COMMIT .
-          - docker push registry.digitalocean.com/pckg-app/pendo:$BITBUCKET_COMMIT
+          ## auth docker
+          #- mkdir ~/.docker
+          #- touch ~/.docker/config.json
+          #- echo $DOCKER_HUB_JSON > ~/.docker/config.json
 
-          # notify condo about the deploy
-          - curl -d repository=https://github.com/$GITHUB_REPOSITORY.git -d branch=$GITHUB_BRANCH -d PCKG_BUILD_ID=$GITHUB_SHA http://condo.foobar.si/webhook
+          ## build and push
+          #- docker build -t registry.digitalocean.com/pckg-app/pendo:$GITHUB_SHA .
+          #- docker push registry.digitalocean.com/pckg-app/pendo:$GITHUB_SHA
+
+          ## notify condo about the deploy
+          #- curl -d repository=https://github.com/$GITHUB_REPOSITORY.git -d branch=$GITHUB_BRANCH -d PCKG_BUILD_ID=$GITHUB_SHA http://condo.foobar.si/webhook
