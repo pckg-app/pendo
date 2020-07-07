@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.*",
-    "@fortawesome/fontawesome-pro": "^5.*",
+    "@fortawesome/fontawesome-free": "^5.*",
     "animate.css": "^3.*",
     "babel-minify-webpack-plugin": "^0.3.1",
     "bootstrap": "^3.*",
