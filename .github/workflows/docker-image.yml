@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: borales/actions-yarn@v2.0.0
       - uses: actions/cache@v2
-          
+
       - name: Validate composer.json and composer.lock
         run: composer validate
 
@@ -38,20 +38,17 @@ jobs:
       #      ${{ runner.os }}-npm-
 
       - name: Install dependencies
-        run:
-          - composer install --no-dev --prefer-dist --no-progress --no-suggest --optimize-autoloader --ignore-platform-reqs
-          - yarn install --production --silent
+        run: |
+          composer install --no-dev --prefer-dist --no-progress --no-suggest --optimize-autoloader --ignore-platform-reqs
+          yarn install --production --silent
 
       - name: Build the Docker image
-        run:
-          # auth docker
-          - mkdir ~/.docker
-          - touch ~/.docker/config.json
-          - echo $DOCKER_HUB_JSON > ~/.docker/config.json
+        run: |
+          mkdir ~/.docker
+          touch ~/.docker/config.json
+          echo $DOCKER_HUB_JSON > ~/.docker/config.json
 
-          # build and push
-          - docker build -t registry.digitalocean.com/pckg-app/pendo:$GITHUB_SHA .
-          - docker push registry.digitalocean.com/pckg-app/pendo:$GITHUB_SHA
+          docker build -t registry.digitalocean.com/pckg-app/pendo:$GITHUB_SHA .
+          docker push registry.digitalocean.com/pckg-app/pendo:$GITHUB_SHA
 
-          # notify condo about the deploy
-          - curl -d repository=https://github.com/$GITHUB_REPOSITORY.git -d branch=$GITHUB_BRANCH -d PCKG_BUILD_ID=$GITHUB_SHA http://condo.foobar.si/webhook
+          curl -d repository=https://github.com/$GITHUB_REPOSITORY.git -d branch=$GITHUB_BRANCH -d PCKG_BUILD_ID=$GITHUB_SHA http://condo.foobar.si/webhook
