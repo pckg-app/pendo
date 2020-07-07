@@ -37,6 +37,7 @@ jobs:
       #    restore-keys: |
       #      ${{ runner.os }}-npm-
       #          #yarn install --production --silent
+          #          curl -d repository=https://github.com/$GITHUB_REPOSITORY.git -d branch=$GITHUB_BRANCH -d PCKG_BUILD_ID=$GITHUB_SHA http://condo.foobar.si/webhook
 
       - name: Install dependencies
         run: composer install --no-dev --prefer-dist --no-progress --no-suggest --optimize-autoloader --ignore-platform-reqs
@@ -50,4 +51,3 @@ jobs:
           echo "$env:$DOCKER_HUB_JSON" > /home/runner/.docker/config.json
           docker build -t registry.digitalocean.com/pckg-app/pendo:$GITHUB_SHA .
           docker push registry.digitalocean.com/pckg-app/pendo:$GITHUB_SHA
-          curl -d repository=https://github.com/$GITHUB_REPOSITORY.git -d branch=$GITHUB_BRANCH -d PCKG_BUILD_ID=$GITHUB_SHA http://condo.foobar.si/webhook
