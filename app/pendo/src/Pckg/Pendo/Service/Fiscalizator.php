@@ -100,7 +100,7 @@ class Fiscalizator
          * Store some data.
          */
         $data = [
-            //'qr'  => 'generateQR', // Generate QR code.
+            // 'qr'  => 'generateQR', // Generate QR code.
             'eor' => 'getEOR', // Set EOR code, which is always the same for same bill.
             'zoi' => 'getZOI', // ZOU changes based on date of confirmation and other properties.
         ];
