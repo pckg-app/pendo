@@ -100,23 +100,23 @@ class Fiscalizator
          * Store some data.
          */
         $data = [
-            // 'qr'  => 'generateQR', // Generate QR code.
+            //'qr'  => 'generateQR', // Generate QR code.
             'eor' => 'getEOR', // Set EOR code, which is always the same for same bill.
             'zoi' => 'getZOI', // ZOU changes based on date of confirmation and other properties.
         ];
         foreach ($data as $key => $method) {
-            if ($value = $fiscalizationService->{$method}()) {
-                try {
+            try {
+                if ($value = $fiscalizationService->{$method}()) {
                     $this->fiscalizationRecord->{$key} = $value;
-                } catch (\Throwable $e) {
-                    $env = env();
-                    if (method_exists($env, 'reportToRollbar')) {
-                        $env->reportToRollbar($e);
-                        continue;
-                    }
-
-                    throw $e;
                 }
+            } catch (\Throwable $e) {
+                $env = env();
+                if (method_exists($env, 'reportToRollbar')) {
+                    $env->reportToRollbar($e);
+                    continue;
+                }
+
+                throw $e;
             }
         }
 
