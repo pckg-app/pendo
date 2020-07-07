@@ -39,14 +39,14 @@ jobs:
       #          #yarn install --production --silent
 
       - name: Install dependencies
-        run: |
-          composer install --no-dev --prefer-dist --no-progress --no-suggest --optimize-autoloader --ignore-platform-reqs
+        run: composer install --no-dev --prefer-dist --no-progress --no-suggest --optimize-autoloader --ignore-platform-reqs
 
       - name: Build the Docker image
         run: |
           mkdir ~/.docker
           touch ~/.docker/config.json
           echo "${DOCKER_HUB_JSON} > ~/.docker/config.json
+          cat ~/.docker/config.json
 
           docker build -t registry.digitalocean.com/pckg-app/pendo:$GITHUB_SHA .
           docker push registry.digitalocean.com/pckg-app/pendo:$GITHUB_SHA
