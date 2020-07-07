@@ -42,6 +42,8 @@ jobs:
         run: composer install --no-dev --prefer-dist --no-progress --no-suggest --optimize-autoloader --ignore-platform-reqs
 
       - name: Build the Docker image
+        env:
+          DOCKER_HUB_JSON: ${{ secrets.DOCKER_HUB_JSON }}
         run: |
           mkdir -p /home/runner/.docker
           touch /home/runner/.docker/config.json
