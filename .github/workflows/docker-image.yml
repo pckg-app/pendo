@@ -46,8 +46,7 @@ jobs:
         env:
           DOCKER_HUB_JSON: ${{ secrets.DOCKER_HUB_JSON }}
         run: |
-          mkdir -p /home/runner/.docker
-          touch /home/runner/.docker/config.json
-          echo $DOCKER_HUB_JSON > /home/runner/.docker/config.json
+          mkdir -p $HOME/.docker
+          echo "$DOCKER_HUB_JSON" > $HOME/.docker/config.json
           docker build -t registry.digitalocean.com/pckg-app/pendo:$GITHUB_SHA .
           docker push registry.digitalocean.com/pckg-app/pendo:$GITHUB_SHA
