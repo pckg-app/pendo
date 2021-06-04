@@ -26,9 +26,11 @@ class Business
 
     public function getTaxNumber($slice = true)
     {
-        return $slice
-            ? substr($this->taxNumber, 2)
-            : $this->taxNumber;
+        if (!in_array(substr($this->taxNumber, 0, 2), ['SI', 'HR'])) {
+            return $this->taxNumber;
+        }
+
+        return substr($this->taxNumber, 2);
     }
 
     public function getValidityDate()

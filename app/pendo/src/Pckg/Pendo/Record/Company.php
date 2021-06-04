@@ -105,4 +105,12 @@ class Company extends Record
         return $this->country->createFiscalizationService($business, $invoice, $this);
     }
 
+    public function getVatNumberNoPrefixAttribute()
+    {
+        if (!in_array(substr($this->vat_number, 0, 2), ['SI', 'HR'])) {
+            return $this->vat_number;
+        }
+
+        return substr($this->vat_number, 2);
+    }
 }

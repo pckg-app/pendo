@@ -57,7 +57,7 @@ class Invoice
         /**
          * Get some data from apiKey.
          */
-        $invoiceData['vat_number'] = substr($company->vat_number, 2);
+        $invoiceData['vat_number'] = $company->vatNumberNoPrefix;
 
         /**
          * Set handler.
