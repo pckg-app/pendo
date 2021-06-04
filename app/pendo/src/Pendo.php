@@ -1,7 +1,6 @@
 <?php
 
 use Pckg\Auth\Middleware\LoginWithApiKeyHeader;
-use Pckg\Auth\Middleware\RegisterApiKeyHeader;
 use Pckg\Auth\Provider\Auth;
 use Pckg\Framework\Provider;
 use Pckg\Framework\Provider\Framework;
@@ -30,7 +29,7 @@ class Pendo extends Provider
     public function middlewares()
     {
         return [
-            RegisterApiKeyHeader::class,
+            \Pckg\Pendo\Middleware\RegisterApiKeyHeader::class, // moved from pckg/auth
         ];
     }
 
@@ -44,13 +43,13 @@ class Pendo extends Provider
     public function assets() {
         return [
             'libraries' => [
-                '/build/js/libraries.js',
+                '/build/libraries.js',
                 //'/build/js/app.css',
                 '/node_modules/bootstrap/dist/css/bootstrap.min.css',
                 'less/app.css',
             ],
             'footer' => [
-                '/build/js/app.js'
+                '/build/app.js'
             ],
         ];
     }

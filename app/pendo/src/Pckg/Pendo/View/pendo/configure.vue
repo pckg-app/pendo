@@ -54,7 +54,7 @@
 </template>
 
 <script>
-    const PckgHtmlbuilderDropzoneComponent = () => import ("../../../../../../../vendor/pckg/generic/src/Pckg/Maestro/public/vue/pckg-htmlbuilder-dropzone.vue");
+    const PckgHtmlbuilderDropzoneComponent = () => import ("../../../../../../../vendor/pckg/helpers-js/vue/pckg-htmlbuilder-dropzone.vue");
     export default {
         props: {
             apiKey: {
