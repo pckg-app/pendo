@@ -18,7 +18,7 @@
     "bootstrap": "^3.*",
     "dropzone": "^5.7.0",
     "https": "^1.*",
-    "jquery": "^2.*",
+    "jquery": "^3.*",
     "js-sha512": "^0.8.0",
     "moment": "^2.*",
     "moment-timezone": "^0.5.*",
