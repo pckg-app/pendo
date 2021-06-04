@@ -13,6 +13,8 @@
     "ext-dom": "*",
     "ext-xmlwriter": "*",
     "ext-curl": "*",
+    "ext-openssl": "*",
+    "pckg-app/frontend": "dev-master",
     "pckg/framework": "dev-master",
     "pckg/migrator": "dev-master",
     "pckg/queue": "dev-master",
@@ -25,7 +27,6 @@
     "pckg-app/api": "dev-master",
     "pckg/manager": "dev-master",
     "jonnyw/php-phantomjs": "4.*",
-    "nesbot/carbon": "1.*",
     "twbs/bootstrap": "3.*",
     "components/jquery": "2.*",
     "fortawesome/font-awesome": "4.*",
@@ -34,13 +35,12 @@
     "league/csv": "^8.1",
     "doctrine/cache": "^1.6",
     "defuse/php-encryption": "^2.0",
-    "symfony/dependency-injection": "3.3.*",
     "guzzlehttp/guzzle": "6.*",
-    "ext-openssl": "*",
     "ramsey/uuid": "^4.0@dev"
   },
   "require-dev": {
-    "codeception/codeception": "dev-master"
+    "pckg-app/frontend-dev": "dev-master"
   },
-  "minimum-stability": "dev"
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
