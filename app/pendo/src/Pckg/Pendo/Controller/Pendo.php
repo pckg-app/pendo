@@ -99,7 +99,7 @@ class Pendo
                     $appKey->app->company->setAndSave([
                         'p12' => $hash,
                         'pem' => str_replace('.p12', '.pem', $hash),
-                        'server' => $appKey->app->company->country->code === 'SI' ? 'SIGOV-CA-2018.pem' : 'finaprodmerged.pem',
+                        'server' => $appKey->app->company->country->code === 'SI' ? 'SIGOV-CA-2020.pem' : 'finaprodmerged.pem',
                         'mode' => 'prod',
                         'hash' => $asciiKey,
                         'password' => Crypto::encrypt($password, $key),
